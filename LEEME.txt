@@ -1,0 +1,48 @@
+PÁGINA CFC — VERSIÓN 34
+======================
+
+CAMBIOS DE ESTA VERSIÓN
+- El formulario de Activador fue simplificado y conserva únicamente información útil para una experiencia breve.
+- Modalidad, materiales, preparación, instrucción inicial y niveles avanzados se reservan para Dispositivo.
+- La lista de apartados ahora controla también los campos del formulario: al desmarcar una opción, su campo desaparece inmediatamente.
+- Los campos ocultos quedan desactivados y no se incorporan accidentalmente a la ficha creada.
+- Los apartados seleccionables ahora cambian según el tipo de ficha elegido.
+- En Activador se muestran solamente los bloques breves y propios de un activador.
+- Metodología, storytelling, reglas, rol facilitador, seguridad, finalización y resultados quedan reservados para Dispositivo.
+- Al cambiar entre Activador y Dispositivo, las opciones se actualizan automáticamente sin mezclar contenidos.
+- El creador permite seleccionar exactamente qué apartados aparecerán en la ficha.
+- Pueden incluirse o excluirse descripción, duración, participantes, modalidad y objetivo.
+- También pueden seleccionarse materiales, preparación, metodología, storytelling, instrucciones, reglas y desarrollo.
+- Rol de facilitación, seguridad, finalización, preguntas, aprendizajes, resultados, variaciones y observaciones son opcionales.
+- Los apartados desmarcados no aparecen ni en la vista interna ni en la ficha para imprimir.
+- Se añadió un constructor opcional de niveles para Activadores y Dispositivos.
+- Se pueden crear tantos niveles como sean necesarios.
+- Cada nivel incluye nombre, duración y una explicación amplia de su contexto, reto y resultado esperado.
+- Los niveles pueden eliminarse o añadirse antes de crear la ficha.
+- Si no se activa la opción de niveles, la ficha se genera normalmente sin ese bloque.
+- Se mantiene la cuadrícula opcional al final de los Dispositivos.
+- Toda la experiencia continúa funcionando en una sola pestaña.
+- La clave administrativa ya no está escrita en los archivos públicos del sitio.
+- Netlify valida las acciones protegidas mediante una variable de entorno privada.
+
+CONFIGURAR LA CLAVE EN NETLIFY
+1. Abre Site configuration > Environment variables en tu sitio de Netlify.
+2. Crea una variable llamada CFC_ADMIN_PASSWORD.
+3. Coloca como valor la clave administrativa acordada.
+4. Vuelve a desplegar el sitio para activar la validación.
+
+PUBLICAR CON NETLIFY DROP
+1. Inicia sesión en tu cuenta de Netlify.
+2. Descomprime v034.zip.
+3. Arrastra la carpeta v034 completa a https://app.netlify.com/drop
+4. Espera a que Netlify publique la página.
+
+IMPORTANTE
+Las fichas, programas y cambios creados se conservan en el navegador utilizado.
+Utiliza la opción de respaldo para trasladarlos o recuperarlos en otro navegador.
+Las acciones administrativas requieren que el sitio esté publicado en Netlify y que CFC_ADMIN_PASSWORD esté configurada.
+
+USO LOCAL
+1. Extrae v034.zip completo.
+2. Abre la carpeta v034.
+3. Haz doble clic en “ABRIR PAGINA CFC.cmd”.

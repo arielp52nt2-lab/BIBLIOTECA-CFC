@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ficha técnica CFC</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body{background:#eee4d3;padding:35px}.sheet{max-width:850px;margin:auto;background:#fffaf0;box-shadow:var(--shadow)}.sheet .detail-banner{padding:55px}.sheet .detail-content{padding:50px 55px}.printbar{max-width:850px;margin:0 auto 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.printbar a,.printbar button{border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer;text-decoration:none}.printbar a{color:#111;background:white}.printbar button{background:var(--wine);color:white}.sheet-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 25px}.sheet-meta span{border:1px solid rgba(255,255,255,.38);border-radius:9px;padding:7px 10px;color:white;font:700 10px Manrope,sans-serif;text-transform:uppercase}.empty-sheet{max-width:700px;margin:80px auto;padding:35px;border-radius:20px;background:white;text-align:center}@media(max-width:650px){body{padding:12px}.sheet .detail-banner,.sheet .detail-content{padding:30px 22px}.printbar{align-items:stretch;flex-direction:column}.printbar a,.printbar button{text-align:center}}@media print{body{padding:0;background:white}.printbar{display:none}.sheet{box-shadow:none}.detail-banner{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+  </style>
+  <script src="js/ficha.js" defer></script>
+</head>
+<body>
+  <div class="printbar"><a href="index.html">← Volver a la bitácora</a><button type="button" onclick="window.print()">Guardar como PDF / Imprimir</button></div>
+  <main class="sheet" hidden>
+    <header class="detail-banner">
+      <div class="sheet-meta"></div>
+      <p class="detail-label"></p>
+      <span class="detail-icon"></span>
+      <h2 class="sheet-title"></h2>
+      <p class="detail-summary"></p>
+    </header>
+    <article class="detail-content"></article>
+  </main>
+  <section class="empty-sheet" hidden><h1>No encontramos la ficha</h1><p>Vuelve a la bitácora y abre nuevamente la experiencia.</p></section>
+</body>
+</html>

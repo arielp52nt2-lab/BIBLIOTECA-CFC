@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>Experiencias CFC | Centro de Formación Continua</title>
+  <meta name="description" content="Biblioteca interactiva de activadores y dispositivos para crear experiencias de aprendizaje memorables.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand rrhh-header-brand" href="#inicio" aria-label="Recursos Humanos, ir al inicio">
+      <img class="rrhh-brand-logo" src="assets/logo-rrhh-3d-transparente.png" alt="Recursos Humanos Grupo KFC">
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a class="active" href="#inicio">Inicio</a>
+      <button class="brands-menu-button" type="button" data-brands-toggle aria-expanded="false" aria-controls="marcas">Marcas <span class="nav-brand-selection"></span></button>
+      <a href="#catalogo" data-nav-filter="activador">Activadores</a>
+      <a href="#catalogo" data-nav-filter="dispositivo">Dispositivos</a>
+      <a href="#catalogo" data-nav-filter="favoritos">Favoritos <span class="favorite-count">0</span></a>
+      <button class="mobile-upload-action" type="button" data-upload-toggle>Crear ficha</button>
+      <a href="#acerca">Acerca del CFC</a>
+    </nav>
+    <button class="nav-action upload-nav-action" type="button" data-upload-toggle>Crear ficha <span>＋</span></button>
+  </header>
+
+  <aside class="hero-welcome-robot greet" aria-label="Asistente de bienvenida">
+    <div class="upload-robot-bubble">Bienvenido<span aria-hidden="true"></span></div>
+    <div class="upload-robot-figure" aria-hidden="true">
+      <img class="robot-body" src="assets/robot-bienvenida.png" alt="">
+      <img class="robot-right-arm" src="assets/robot-bienvenida.png" alt="">
+    </div>
+  </aside>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span></span> Centro de Formación Continua</p>
+        <h1>Experiencias que <em>activan</em> el aprendizaje.</h1>
+        <p class="hero-lead">Un espacio que reúne herramientas, actividades y recursos para diseñar encuentros más creativos, humanos y memorables.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#catalogo" data-nav-filter="activador">Explorar Activadores <span>→</span></a>
+          <a class="button button-light" href="#catalogo" data-nav-filter="dispositivo">Explorar Dispositivos <span>↘</span></a>
+        </div>
+        <div class="hero-stats" aria-label="Resumen de la biblioteca">
+          <div><strong>∞</strong><span>Experiencias disponibles</span></div>
+          <div><strong>02</strong><span>Categorías para explorar</span></div>
+          <div><strong>∞</strong><span>Formas de aprender</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" aria-label="Identidad visual del CFC">
+        <div class="visual-orbit orbit-a"></div>
+        <div class="visual-orbit orbit-b"></div>
+        <div class="logo-platform">
+          <div class="logo-rotator" aria-label="Logo tridimensional giratorio del CFC Grupo KFC">
+            <div class="logo-face logo-front">
+              <img src="assets/logo-cfc-completo-3d-transparente.png" alt="Centro de Formación Continua CFC Grupo KFC">
+            </div>
+            <div class="logo-face logo-back" aria-hidden="true">
+              <img src="assets/logo-cfc-completo-3d-transparente.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="float-tag tag-one"><span>✦</span> Creatividad</div>
+        <div class="float-tag tag-two"><span>↗</span> Innovación</div>
+        <div class="float-tag tag-three"><span>●</span> Aprendizaje</div>
+        <span class="shape shape-pink" aria-hidden="true"></span>
+        <span class="shape shape-blue" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <div class="brands-backdrop" hidden></div>
+    <section class="brands-section brands-drawer" id="marcas" aria-label="Selector de marcas" hidden>
+      <button class="close-brands-drawer" type="button" aria-label="Cerrar selector de marcas">×</button>
+      <div class="brands-heading reveal">
+        <div>
+          <p class="eyebrow"><span></span> Ecosistema Grupo KFC</p>
+          <h2>Selecciona una marca.</h2>
+        </div>
+        <div class="brands-intro">
+          <p>Organiza y explora las experiencias desarrolladas para cada marca y área del grupo.</p>
+          <span class="brand-selection-status" aria-live="polite">Ninguna marca seleccionada</span>
+        </div>
+      </div>
+      <div class="brand-grid" aria-label="Marcas disponibles"></div>
+      <div class="car-departments" id="carDepartments" hidden>
+        <div class="car-panel-heading">
+          <div>
+            <p>CAR · Áreas corporativas</p>
+            <h3>Selecciona un departamento</h3>
+          </div>
+          <button class="close-car-panel" type="button" aria-label="Cerrar departamentos de CAR">×</button>
+        </div>
+        <div class="department-grid" role="group" aria-label="Departamentos de CAR"></div>
+        <p class="department-note">Selecciona un departamento para administrar sus programas, activadores y dispositivos.</p>
+        <details class="car-area-admin">
+          <summary>Administrar áreas de CAR <span>＋</span></summary>
+          <form id="carAreaForm">
+            <div class="car-area-fields">
+              <label for="carAreaName"><span>Nombre del área</span><input id="carAreaName" type="text" maxlength="60" placeholder="Ej.: Operaciones"></label>
+              <label for="carAreaPassword"><span>Clave de seguridad</span><input id="carAreaPassword" type="password" autocomplete="off" placeholder="Clave requerida" required></label>
+            </div>
+            <p class="car-area-message" aria-live="polite"></p>
+            <div class="car-area-actions">
+              <button class="delete-car-area" type="button" disabled>Eliminar área seleccionada</button>
+              <button class="add-car-area" type="submit">Añadir nueva área <b>＋</b></button>
+            </div>
+          </form>
+        </details>
+      </div>
+      <section class="brand-programs" id="brandPrograms" hidden aria-labelledby="brandProgramsTitle">
+        <div class="brand-programs-heading">
+          <div>
+            <p>Programas por marca</p>
+            <h3 id="brandProgramsTitle">Organiza las experiencias</h3>
+          </div>
+          <span class="program-brand-name"></span>
+        </div>
+        <div class="brand-programs-layout">
+          <form class="program-form" id="programForm">
+            <input id="editingProgramId" type="hidden">
+            <label for="programName">Nombre del programa</label>
+            <input id="programName" name="programName" type="text" maxlength="100" placeholder="Ej.: Escuela de líderes 2026" required>
+            <fieldset>
+              <legend>Activadores y dispositivos utilizados</legend>
+              <p>Selecciona todas las experiencias que formaron parte del programa.</p>
+              <div class="program-device-options"></div>
+            </fieldset>
+            <label for="programPassword">Clave de seguridad</label>
+            <input id="programPassword" name="programPassword" type="password" autocomplete="off" placeholder="Clave requerida para guardar" required>
+            <p class="program-form-message" aria-live="polite"></p>
+            <div class="program-form-actions">
+              <button class="cancel-program-edit" type="button" hidden>Cancelar edición</button>
+              <button class="save-program" type="submit">Añadir programa <span>＋</span></button>
+            </div>
+          </form>
+          <div class="program-library">
+            <div class="program-library-heading">
+              <div><small>Programas guardados</small><strong class="program-count">0 programas</strong></div>
+              <span class="program-storage-status">Guardado local disponible</span>
+            </div>
+            <div class="program-list"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="search-zone" id="catalogo">
+      <div class="search-heading reveal">
+        <p class="eyebrow"><span></span> Biblioteca interactiva</p>
+        <h2>Encuentra la experiencia adecuada.</h2>
+        <p>Busca por nombre, objetivo, duración, participantes o competencia.</p>
+      </div>
+
+      <div class="search-shell reveal">
+        <label class="search-box" for="activitySearch">
+          <span class="search-icon" aria-hidden="true"></span>
+          <input id="activitySearch" type="search" autocomplete="off" placeholder="¿Qué actividad estás buscando?" aria-describedby="resultSummary">
+          <kbd>⌘ K</kbd>
+          <button class="clear-search" type="button" aria-label="Limpiar búsqueda">×</button>
+        </label>
+        <div class="suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+      </div>
+
+      <div class="catalog-toolbar reveal">
+        <div class="quick-tabs" role="group" aria-label="Filtrar por categoría">
+          <button class="quick-tab active" type="button" data-filter-category="todos">Todas <span>5</span></button>
+          <button class="quick-tab" type="button" data-filter-category="activador">Activadores <span>1</span></button>
+          <button class="quick-tab" type="button" data-filter-category="dispositivo">Dispositivos <span>4</span></button>
+          <button class="quick-tab" type="button" data-filter-category="favoritos">Favoritos <span class="favorite-count">0</span></button>
+        </div>
+        <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="filterPanel">
+          <span class="sliders-icon" aria-hidden="true"></span> Filtros <b class="active-filter-count">0</b>
+        </button>
+      </div>
+
+      <aside class="filter-panel" id="filterPanel" aria-label="Filtros avanzados">
+        <div class="filter-group">
+          <label for="durationFilter">Duración</label>
+          <select id="durationFilter">
+            <option value="">Cualquier duración</option>
+            <option value="corta">Hasta 20 minutos</option>
+            <option value="media">20–45 minutos</option>
+            <option value="larga">Más de 45 minutos</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="participantsFilter">Participantes</label>
+          <select id="participantsFilter">
+            <option value="">Cualquier grupo</option>
+            <option value="pequeno">Hasta 12</option>
+            <option value="mediano">13–20</option>
+            <option value="grande">Más de 20</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="modeFilter">Modalidad</label>
+          <select id="modeFilter">
+            <option value="">Todas</option>
+            <option value="presencial">Presencial</option>
+            <option value="virtual">Virtual</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="skillFilter">Competencia</label>
+          <select id="skillFilter">
+            <option value="">Todas</option>
+            <option value="conexion">Conexión</option>
+            <option value="comunicacion">Comunicación</option>
+            <option value="estrategia">Estrategia</option>
+            <option value="confianza">Confianza</option>
+            <option value="reflexion">Reflexión</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="difficultyFilter">Dificultad</label>
+          <select id="difficultyFilter">
+            <option value="">Todas</option>
+            <option value="inicial">Inicial</option>
+            <option value="intermedia">Intermedia</option>
+            <option value="avanzada">Avanzada</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="audienceFilter">Público</label>
+          <select id="audienceFilter">
+            <option value="">Todos</option>
+            <option value="equipos">Equipos</option>
+            <option value="lideres">Líderes</option>
+            <option value="general">Público general</option>
+          </select>
+        </div>
+        <button class="reset-filters" type="button">Limpiar filtros</button>
+      </aside>
+
+      <div class="results-row">
+        <p id="resultSummary" aria-live="polite">Mostrando 5 experiencias</p>
+        <span>Selecciona una tarjeta para abrir su ficha técnica</span>
+      </div>
+      <div class="activity-grid" aria-live="polite"></div>
+      <div class="empty-state" hidden>
+        <span>⌁</span>
+        <h3>No encontramos coincidencias</h3>
+        <p>Prueba con otra palabra o limpia los filtros seleccionados.</p>
+        <button type="button" class="button button-primary reset-all">Ver todas las experiencias</button>
+      </div>
+    </section>
+
+    <section class="category-showcase">
+      <article class="showcase-card activator-showcase reveal">
+        <div class="showcase-visual activator-visual" aria-hidden="true">
+          <span class="visual-orbit orbit-one"></span>
+          <span class="visual-orbit orbit-two"></span>
+          <span class="visual-orbit orbit-three"></span>
+          <span class="moving-shape pink-ball ball-one"></span>
+          <span class="moving-shape pink-ball ball-two"></span>
+          <span class="moving-shape pink-ball ball-three"></span>
+          <span class="moving-shape pink-ball ball-four"></span>
+          <span class="activator-emblem"><b></b></span>
+        </div>
+        <div class="showcase-copy">
+          <p>01 · Activa el momento</p>
+          <h2>Activadores</h2>
+          <span>Experiencias breves que ponen al grupo en movimiento, ayudan a soltar barreras, generar confianza y abrirse al encuentro con los demás, creando el espacio para explorar nuevas formas de pensar, relacionarse y actuar.</span>
+          <a href="#catalogo" data-nav-filter="activador">Descubrir activadores <b>→</b></a>
+        </div>
+      </article>
+      <article class="showcase-card device-showcase reveal">
+        <div class="showcase-copy">
+          <p>02 · Transforma la experiencia</p>
+          <h2>Dispositivos</h2>
+          <span>Propuestas experienciales que invitan a involucrarse, asumir retos y salir de los espacios habituales, poniendo a prueba perspectivas, generando aprendizajes significativos y abriendo posibilidades para transformar la manera de pensar, relacionarse y actuar.</span>
+          <a href="#catalogo" data-nav-filter="dispositivo">Descubrir dispositivos <b>→</b></a>
+        </div>
+        <div class="showcase-visual device-visual" aria-hidden="true">
+          <span class="visual-orbit orbit-one"></span>
+          <span class="visual-orbit orbit-two"></span>
+          <span class="moving-shape blue-ball ball-one"></span>
+          <span class="moving-shape blue-ball ball-two"></span>
+          <span class="moving-shape blue-ball ball-three"></span>
+          <span class="moving-shape mini-cube cube-one"></span>
+          <span class="moving-shape mini-cube cube-two"></span>
+          <div class="cube-cluster">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="about" id="acerca">
+      <div class="about-mark reveal">
+        <span class="about-orbit about-orbit-one" aria-hidden="true"></span>
+        <span class="about-orbit about-orbit-two" aria-hidden="true"></span>
+        <span class="about-ball about-ball-red ball-one" aria-hidden="true"></span>
+        <span class="about-ball about-ball-white ball-two" aria-hidden="true"></span>
+        <span class="about-ball about-ball-red ball-three" aria-hidden="true"></span>
+        <span class="about-ball about-ball-white ball-four" aria-hidden="true"></span>
+        <img src="assets/logo-cfc-completo-3d-transparente.png" alt="Centro de Formación Continua CFC Grupo KFC">
+      </div>
+      <div class="about-copy reveal">
+        <p class="eyebrow"><span></span> Acerca del CFC</p>
+        <h2>Aprender también puede sentirse <em>extraordinario.</em></h2>
+        <p>En el Centro de Formación Continua creemos que aprender va más allá de adquirir conocimientos. Es una experiencia que ocurre cuando las personas se conectan, se involucran, se cuestionan y encuentran nuevas posibilidades para hacer las cosas de manera diferente.</p>
+        <p>Diseñamos experiencias de aprendizaje que parten de la realidad, convierten la práctica en una oportunidad para descubrir y generan espacios donde cada persona puede participar, experimentar y construir nuevos significados.</p>
+        <p>Porque formar no es solamente transmitir lo que sabemos. Es crear las condiciones para que las personas se atrevan a explorar, conectar con otros y llevar lo aprendido a la manera en que piensan, trabajan y sirven.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img class="footer-brand" src="assets/logo-recursos-humanos-footer.png" alt="Recursos Humanos Grupo KFC, Gente Desarrollo y Cultura">
+    <div class="footer-center">
+      <p>Biblioteca de experiencias de aprendizaje</p>
+      <img class="footer-signature" src="assets/firma-footer.png" alt="Firma institucional">
+    </div>
+    <a class="back-to-top" href="#inicio"><span>Volver arriba</span><b aria-hidden="true">↑</b></a>
+  </footer>
+
+  <dialog class="upload-dialog" id="uploadDialog" aria-labelledby="uploadTitle">
+    <form class="upload-shell" id="uploadForm">
+      <button class="close-upload-dialog" type="button" aria-label="Cerrar creación de ficha">×</button>
+      <p class="eyebrow"><span></span> Construye la experiencia</p>
+      <h2 id="uploadTitle">Crear una nueva ficha</h2>
+      <p class="upload-intro">Selecciona el tipo de experiencia y completa sus campos. La tarjeta y la ficha visual se crearán automáticamente con el diseño del portal.</p>
+
+      <fieldset class="upload-type-picker">
+        <legend>1. ¿Qué deseas crear?</legend>
+        <label>
+          <input type="radio" name="uploadCategory" value="activador" checked>
+          <span><b>Activador</b><small>Dinámica breve para iniciar o conectar.</small></span>
+        </label>
+        <label>
+          <input type="radio" name="uploadCategory" value="dispositivo">
+          <span><b>Dispositivo</b><small>Metodología o actividad de desarrollo.</small></span>
+        </label>
+      </fieldset>
+
+      <section class="create-fields inclusion-builder" aria-labelledby="includeSectionsTitle">
+        <div class="upload-section-heading"><span>02</span><div><small>Contenido flexible</small><h3 id="includeSectionsTitle">Apartados que aparecerán en la ficha</h3></div></div>
+        <p class="inclusion-help">Para un activador se muestran únicamente los apartados breves que corresponden a este tipo de experiencia.</p>
+        <div class="inclusion-options">
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="summary" checked><span>Descripción inicial</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="duration" checked><span>Duración</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="participants" checked><span>Participantes</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="mode" checked><span>Modalidad</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="objective" checked><span>Objetivo</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="materials" checked><span>Materiales</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="preparation" checked><span>Preparación</span></label>
+          <label data-include-for="activador"><input type="checkbox" name="includeSections" value="moment" checked><span>Momento y energía</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="methodology" checked><span>Metodología</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="storytelling" checked><span>Storytelling</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="instruction" checked><span>Instrucción inicial</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="rules" checked><span>Reglas</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="development" checked><span>Desarrollo</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="facilitator" checked><span>Rol facilitador</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="safety" checked><span>Seguridad</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="completion" checked><span>Finalización</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="questions" checked><span>Preguntas</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="learning" checked><span>Aprendizaje</span></label>
+          <label data-include-for="dispositivo"><input type="checkbox" name="includeSections" value="results" checked><span>Resultados</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="variations" checked><span>Variaciones</span></label>
+          <label data-include-for="activador dispositivo"><input type="checkbox" name="includeSections" value="notes" checked><span>Observaciones</span></label>
+        </div>
+      </section>
+
+      <section class="create-fields" aria-labelledby="createBasicsTitle">
+        <div class="upload-section-heading"><span>03</span><div><small>Identidad de la ficha</small><h3 id="createBasicsTitle">Información principal</h3></div></div>
+        <div class="create-field-grid">
+          <label class="field-span"><span>Nombre de la experiencia *</span><input id="activityName" name="activityName" type="text" maxlength="100" placeholder="Ej.: El Triángulo Perfecto" required></label>
+          <label class="field-span" data-section-field="summary"><span>Resumen para la tarjeta *</span><textarea name="summary" rows="3" maxlength="320" placeholder="Explica brevemente qué vivirá y aprenderá el grupo." required></textarea></label>
+          <label class="field-span" data-section-field="objective"><span>Objetivo general</span><textarea name="objective" rows="3" placeholder="Redacta el resultado principal con un verbo en infinitivo."></textarea></label>
+          <label data-section-field="duration"><span>Duración *</span><input name="duration" type="text" placeholder="Ej.: 45 minutos" required></label>
+          <label data-section-field="participants"><span>Participantes *</span><input name="participants" type="text" placeholder="Ej.: 12 a 30 personas" required></label>
+          <label data-section-field="mode"><span>Modalidad *</span><select name="mode" required><option value="presencial">Presencial</option><option value="virtual">Virtual</option><option value="híbrida">Híbrida</option></select></label>
+          <label><span>Público objetivo</span><input name="audience" type="text" placeholder="Ej.: líderes y equipos"></label>
+          <label class="field-span"><span>Competencias *</span><input name="skills" type="text" placeholder="Comunicación, confianza, liderazgo" required></label>
+        </div>
+      </section>
+
+      <section class="create-fields" data-section-group aria-labelledby="createDesignTitle">
+        <div class="upload-section-heading"><span>04</span><div><small>Diseño de la experiencia</small><h3 id="createDesignTitle">Preparación y facilitación</h3></div></div>
+        <div class="create-field-grid">
+          <label class="field-span" data-section-field="materials"><span>Materiales <small>Uno por línea</small></span><textarea name="materials" rows="4" placeholder="Cuerdas\nTarjetas\nCronómetro"></textarea></label>
+          <label class="field-span" data-section-field="preparation"><span>Preparación del espacio</span><textarea name="preparation" rows="4" placeholder="Describe montaje, distribución, tecnología y seguridad."></textarea></label>
+          <label class="field-span" data-section-field="instruction"><span>Instrucción inicial</span><textarea name="initialInstruction" rows="4" placeholder="Escribe el mensaje que recibirá el grupo antes de comenzar."></textarea></label>
+        </div>
+      </section>
+
+      <section class="create-fields levels-builder" data-create-type="dispositivo" aria-labelledby="levelsBuilderTitle" hidden>
+        <label class="levels-builder-toggle"><input name="levelsEnabled" type="checkbox"><span><b>Añadir niveles a la experiencia</b><small>Opcional · agrega únicamente los niveles que necesites.</small></span></label>
+        <div class="levels-builder-fields" data-levels-fields hidden>
+          <div class="grid-builder-intro"><span>05</span><div><small>Progresión opcional</small><h4 id="levelsBuilderTitle">Construir niveles</h4><p>Cada nivel puede tener su propio nombre, duración y explicación detallada.</p></div></div>
+          <div class="levels-list" data-levels-list></div>
+          <button class="add-level-button" type="button">Añadir otro nivel <span>＋</span></button>
+        </div>
+      </section>
+
+      <section class="create-fields type-fields" data-create-type="activador" aria-labelledby="activatorFieldsTitle">
+        <div class="upload-section-heading"><span>06</span><div><small>Campos del activador</small><h3 id="activatorFieldsTitle">Activa el momento</h3></div></div>
+        <div class="create-field-grid">
+          <label data-section-field="moment"><span>Momento recomendado</span><input name="activatorMoment" type="text" placeholder="Inicio, transición o cierre"></label>
+          <label data-section-field="moment"><span>Nivel de energía</span><select name="activatorEnergy"><option value="">Seleccionar</option><option>Bajo</option><option>Medio</option><option>Alto</option></select></label>
+          <label class="field-span" data-section-field="development"><span>Desarrollo del activador <small>Un paso por línea</small></span><textarea name="activatorDevelopment" rows="7" placeholder="1. Primer paso\n2. Segundo paso\n3. Cierre"></textarea></label>
+          <label class="field-span" data-section-field="questions"><span>Preguntas de cierre <small>Una pregunta por línea</small></span><textarea name="activatorQuestions" rows="5" placeholder="¿Qué descubrimos?\n¿Qué aplicaremos?"></textarea></label>
+          <label class="field-span" data-section-field="learning"><span>Aprendizaje esperado</span><textarea name="activatorLearning" rows="3" placeholder="Describe el mensaje o aprendizaje que debe quedar."></textarea></label>
+          <label class="field-span" data-section-field="variations notes"><span>Variaciones u observaciones</span><textarea name="activatorNotes" rows="3" placeholder="Ajustes por tiempo, grupo o modalidad."></textarea></label>
+        </div>
+      </section>
+
+      <section class="create-fields type-fields" data-create-type="dispositivo" aria-labelledby="deviceFieldsTitle" hidden>
+        <div class="upload-section-heading"><span>06</span><div><small>Campos del dispositivo</small><h3 id="deviceFieldsTitle">Transforma la experiencia</h3></div></div>
+        <div class="create-field-grid">
+          <label><span>Nivel de dificultad</span><select name="deviceDifficulty"><option value="">Seleccionar</option><option>Inicial</option><option>Intermedia</option><option>Avanzada</option></select></label>
+          <label data-section-field="methodology"><span>Metodología</span><input name="deviceMethodology" type="text" placeholder="Ej.: Aprendizaje experiencial"></label>
+          <label class="field-span" data-section-field="storytelling"><span>Storytelling</span><textarea name="deviceStorytelling" rows="4" placeholder="Historia o metáfora que introduce el reto."></textarea></label>
+          <label class="field-span" data-section-field="rules"><span>Acuerdos o reglas <small>Una regla por línea</small></span><textarea name="deviceRules" rows="4" placeholder="Regla 1\nRegla 2"></textarea></label>
+          <label class="field-span" data-section-field="development"><span>Desarrollo del dispositivo <small>Una fase por línea</small></span><textarea name="deviceDevelopment" rows="8" placeholder="1. Planificación - 5 minutos\n2. Ejecución\n3. Revisión"></textarea></label>
+          <label class="field-span" data-section-field="facilitator"><span>Rol de la persona facilitadora</span><textarea name="deviceFacilitator" rows="4" placeholder="Qué debe observar, registrar y cuándo intervenir."></textarea></label>
+          <label class="field-span" data-section-field="safety"><span>Seguridad y cuidados</span><textarea name="deviceSafety" rows="3" placeholder="Riesgos y medidas preventivas. Escribe No aplica si corresponde."></textarea></label>
+          <label class="field-span" data-section-field="completion"><span>Criterio de finalización</span><textarea name="deviceCompletion" rows="2" placeholder="Cómo se determina que el reto terminó."></textarea></label>
+          <label class="field-span" data-section-field="questions"><span>Preguntas de debriefing <small>Una pregunta por línea</small></span><textarea name="deviceQuestions" rows="6" placeholder="¿Qué estrategia funcionó?\n¿Cómo apareció el liderazgo?"></textarea></label>
+          <label class="field-span" data-section-field="learning"><span>Aprendizaje esperado</span><textarea name="deviceLearning" rows="4" placeholder="Qué debería comprender y transferir el grupo."></textarea></label>
+          <label class="field-span" data-section-field="results"><span>Resultados o registro</span><textarea name="deviceResults" rows="3" placeholder="Rondas, tiempos, puntajes, metas o incidencias."></textarea></label>
+          <label class="field-span" data-section-field="variations notes"><span>Variaciones u observaciones</span><textarea name="deviceNotes" rows="3" placeholder="Ajustes y recomendaciones para facilitar."></textarea></label>
+          <div class="field-span grid-builder">
+            <label class="grid-builder-toggle"><input name="gridEnabled" type="checkbox"><span><b>Añadir planilla de registro</b><small>Opcional · aparecerá únicamente al final de la ficha.</small></span></label>
+            <div class="grid-builder-fields" data-grid-fields hidden>
+              <div class="grid-builder-intro"><span>05</span><div><small>Herramienta opcional</small><h4>Construir cuadrícula</h4><p>Define la estructura de la tabla. Las celdas quedarán vacías para llenarlas al imprimir o durante la actividad.</p></div></div>
+              <div class="create-field-grid">
+                <label class="field-span"><span>Título de la planilla</span><input name="gridTitle" type="text" maxlength="120" placeholder="Ej.: Planilla de registros del Torneo de Quidditch"></label>
+                <label><span>Nombre del eje X</span><input name="gridXAxis" type="text" maxlength="60" placeholder="Ej.: Niveles"></label>
+                <label><span>Nombre del eje Y</span><input name="gridYAxis" type="text" maxlength="60" placeholder="Ej.: Indicadores"></label>
+                <label><span>Número de columnas</span><input name="gridColumns" type="number" min="1" max="10" value="4"></label>
+                <label><span>Número de filas</span><input name="gridRows" type="number" min="1" max="20" value="6"></label>
+                <label class="field-span"><span>Encabezados superiores <small>Uno por línea</small></span><textarea name="gridColumnLabels" rows="5" placeholder="Nivel 1 · Nivel 2 · Nivel 3 · Nivel 4"></textarea></label>
+                <label class="field-span"><span>Etiquetas del costado izquierdo <small>Una por línea</small></span><textarea name="gridRowLabels" rows="6" placeholder="Meta · Resultado 1 · Resultado 2 · Subtotal · Observaciones · Total"></textarea></label>
+                <label class="field-span"><span>Texto inferior de la planilla</span><input name="gridFooter" type="text" maxlength="180" placeholder="Ej.: Observaciones finales o instrucciones de registro"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="upload-message" aria-live="polite"></p>
+      <div class="upload-actions">
+        <button class="upload-cancel" type="button">Cancelar</button>
+        <button class="button button-primary upload-submit" type="submit">Crear ficha <span>→</span></button>
+      </div>
+
+      <section class="backup-center" aria-labelledby="backupTitle">
+        <div class="backup-copy">
+          <span class="backup-shield" aria-hidden="true">◇</span>
+          <div><small>Respaldo local</small><h3 id="backupTitle">Protege la información cargada</h3><p>Las fichas se guardan automáticamente. Descarga un respaldo para recuperarlas si se limpia el navegador o cambias de equipo.</p></div>
+        </div>
+        <div class="backup-actions">
+          <button class="download-backup" type="button">Descargar respaldo <span>↓</span></button>
+          <button class="restore-backup" type="button">Restaurar respaldo <span>↑</span></button>
+          <input class="restore-backup-file" type="file" accept="application/json,.json" hidden>
+        </div>
+        <p class="backup-message" aria-live="polite"></p>
+      </section>
+
+      <section class="uploaded-manager" aria-labelledby="managerTitle">
+        <div class="uploaded-manager-heading">
+          <div>
+            <small>Administración</small>
+            <h3 id="managerTitle">Editar o eliminar fichas</h3>
+          </div>
+          <span class="uploaded-count">0 fichas</span>
+        </div>
+        <p class="uploaded-manager-note">Administra los nombres o elimina fichas originales y añadidas desde el portal. Ambas acciones requieren la clave de seguridad.</p>
+        <div class="uploaded-list"></div>
+        <p class="uploaded-empty">No existen fichas disponibles para administrar.</p>
+      </section>
+
+    </form>
+  </dialog>
+
+  <dialog class="rename-dialog" id="renameDialog" aria-labelledby="renameTitle">
+    <form class="rename-shell" id="renameForm">
+      <button class="close-rename-dialog" type="button" aria-label="Cancelar edición">×</button>
+      <span class="rename-icon" aria-hidden="true">✎</span>
+      <p class="eyebrow"><span></span> Edición protegida</p>
+      <h2 id="renameTitle">Cambiar nombre de la ficha</h2>
+      <p>Solo se modificará el nombre. El contenido y la categoría permanecerán sin cambios.</p>
+      <label for="renameActivityName">Nuevo nombre</label>
+      <input id="renameActivityName" name="renameActivityName" type="text" maxlength="100" required>
+      <label for="renamePassword">Clave de seguridad</label>
+      <input id="renamePassword" name="renamePassword" type="password" autocomplete="off" required>
+      <p class="rename-message" aria-live="polite"></p>
+      <div class="rename-actions">
+        <button class="rename-cancel" type="button">Cancelar</button>
+        <button class="rename-confirm" type="submit">Guardar nuevo nombre</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="program-auth-dialog" id="programAuthDialog" aria-labelledby="programAuthTitle">
+    <form class="program-auth-shell" id="programAuthForm">
+      <button class="close-program-auth-dialog" type="button" aria-label="Cancelar eliminación">×</button>
+      <span class="program-auth-lock" aria-hidden="true">⌁</span>
+      <p class="eyebrow"><span></span> Acción protegida</p>
+      <h2 id="programAuthTitle">Eliminar programa</h2>
+      <p>Ingresa la clave de seguridad para eliminar <strong class="program-delete-name"></strong>.</p>
+      <label for="programDeletePassword">Clave de seguridad</label>
+      <input id="programDeletePassword" type="password" autocomplete="off" required>
+      <p class="program-auth-message" aria-live="polite"></p>
+      <div class="program-auth-actions">
+        <button class="program-auth-cancel" type="button">Conservar programa</button>
+        <button class="program-auth-confirm" type="submit">Eliminar programa</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="delete-dialog" id="deleteDialog" aria-labelledby="deleteTitle">
+    <form class="delete-shell" id="deleteForm">
+      <button class="close-delete-dialog" type="button" aria-label="Cancelar eliminación">×</button>
+      <span class="delete-lock" aria-hidden="true">⌁</span>
+      <p class="eyebrow"><span></span> Acción protegida</p>
+      <h2 id="deleteTitle">Eliminar ficha definitivamente</h2>
+      <p>Ingresa la clave de seguridad para eliminar <strong class="delete-activity-name"></strong>. Si la clave no es correcta, no se realizará ningún cambio.</p>
+      <label for="deletePassword">Clave de seguridad</label>
+      <input id="deletePassword" name="deletePassword" type="password" autocomplete="off" required>
+      <p class="delete-message" aria-live="polite"></p>
+      <div class="delete-actions">
+        <button class="delete-cancel" type="button">Conservar ficha</button>
+        <button class="delete-confirm" type="submit">Eliminar definitivamente</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="detail-dialog" id="detailDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-shell">
+      <button class="close-dialog" type="button" aria-label="Cerrar ficha">×</button>
+      <div class="detail-banner">
+        <div class="detail-badges"></div>
+        <span class="detail-icon" aria-hidden="true"></span>
+        <h2 id="dialogTitle"></h2>
+        <p class="detail-summary"></p>
+      </div>
+      <article class="detail-content"></article>
+      <div class="download-panel">
+        <div><small>Llévala contigo</small><strong>Descarga esta ficha técnica</strong></div>
+        <div class="detail-file-actions">
+          <button class="edit-detail-name" type="button" data-rename-id="">Editar nombre <span>✎</span></button>
+          <a class="original-file-button" href="#" download hidden>Archivo original <span>↓</span></a>
+          <a class="download-button" href="#">Descargar ficha <span>↓</span></a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
