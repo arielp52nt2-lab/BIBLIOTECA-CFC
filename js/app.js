@@ -86,12 +86,10 @@ const uploadedEmpty = document.querySelector(".uploaded-empty");
 const uploadedCount = document.querySelector(".uploaded-count");
 const deleteDialog = document.querySelector("#deleteDialog");
 const deleteForm = document.querySelector("#deleteForm");
-const deletePassword = document.querySelector("#deletePassword");
 const deleteMessage = document.querySelector(".delete-message");
 const renameDialog = document.querySelector("#renameDialog");
 const renameForm = document.querySelector("#renameForm");
 const renameActivityName = document.querySelector("#renameActivityName");
-const renamePassword = document.querySelector("#renamePassword");
 const renameMessage = document.querySelector(".rename-message");
 let pendingDeleteId = "";
 let pendingRenameId = "";
@@ -102,22 +100,6 @@ async function remoteRequest(action, options = {}) {
   const payload = response.headers.get("content-type")?.includes("application/json") ? await response.json() : null;
   if (!response.ok) throw new Error(payload?.error || "No fue posible conectar con el almacenamiento web.");
   return payload;
-}
-
-async function verifyAdminPassword(password) {
-  try {
-    const response = await fetch("/.netlify/functions/verify-admin", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ password })
-    });
-    if (!response.ok) return false;
-    const payload = await response.json();
-    return payload.authorized === true;
-  } catch (error) {
-    console.warn("No fue posible validar la clave de seguridad.", error);
-    return false;
-  }
 }
 
 function originalActivities() {
@@ -299,7 +281,6 @@ const carPanel = document.querySelector("#carDepartments");
 const departmentGrid = document.querySelector(".department-grid");
 const carAreaForm = document.querySelector("#carAreaForm");
 const carAreaName = document.querySelector("#carAreaName");
-const carAreaPassword = document.querySelector("#carAreaPassword");
 const carAreaMessage = document.querySelector(".car-area-message");
 const deleteCarAreaButton = document.querySelector(".delete-car-area");
 const brandsDrawer = document.querySelector(".brands-drawer");
@@ -309,7 +290,6 @@ const navBrandSelection = document.querySelector(".nav-brand-selection");
 const brandPrograms = document.querySelector("#brandPrograms");
 const programForm = document.querySelector("#programForm");
 const programName = document.querySelector("#programName");
-const programPassword = document.querySelector("#programPassword");
 const programDeviceOptions = document.querySelector(".program-device-options");
 const programList = document.querySelector(".program-list");
 const programFormMessage = document.querySelector(".program-form-message");
@@ -320,16 +300,15 @@ let brandProgramRecords = JSON.parse(localStorage.getItem(brandProgramsStorageKe
 let editingProgramId = "";
 const programAuthDialog = document.querySelector("#programAuthDialog");
 const programAuthForm = document.querySelector("#programAuthForm");
-const programDeletePassword = document.querySelector("#programDeletePassword");
 const programAuthMessage = document.querySelector(".program-auth-message");
 let pendingProgramDeleteId = "";
 
-async function syncRemoteState(password) {
+async function syncRemoteState() {
   if (!remoteMode) return;
   await remoteRequest("sync", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ password, programs: brandProgramRecords, carDepartments, deletedActivityIds: [...deletedActivityIds], renamedActivities })
+    body: JSON.stringify({ programs: brandProgramRecords, carDepartments, deletedActivityIds: [...deletedActivityIds], renamedActivities })
   });
 }
 
@@ -472,11 +451,6 @@ function saveCarDepartments() {
 carAreaForm.addEventListener("submit", async event => {
   event.preventDefault();
   const areaName = carAreaName.value.trim();
-  if (!await verifyAdminPassword(carAreaPassword.value)) {
-    carAreaMessage.textContent = "Clave incorrecta. No se realizaron cambios.";
-    carAreaPassword.select();
-    return;
-  }
   if (!areaName) {
     carAreaMessage.textContent = "Escribe el nombre de la nueva área.";
     carAreaName.focus();
@@ -487,10 +461,14 @@ carAreaForm.addEventListener("submit", async event => {
     carAreaName.select();
     return;
   }
+  if (!window.confirm(`¿Confirmas que deseas añadir el área “${areaName}”?`)) {
+    carAreaMessage.textContent = "La creación fue cancelada. No se realizaron cambios.";
+    return;
+  }
   carDepartments.push(areaName);
   selectedDepartments = new Set([areaName]);
   saveCarDepartments();
-  await syncRemoteState(carAreaPassword.value);
+  await syncRemoteState();
   carAreaForm.reset();
   carAreaMessage.textContent = `Área “${areaName}” añadida correctamente.`;
   resetProgramForm();
@@ -503,9 +481,8 @@ deleteCarAreaButton.addEventListener("click", async () => {
     carAreaMessage.textContent = "Selecciona primero el área que deseas eliminar.";
     return;
   }
-  if (!await verifyAdminPassword(carAreaPassword.value)) {
-    carAreaMessage.textContent = "Clave incorrecta. El área se mantiene sin cambios.";
-    carAreaPassword.select();
+  if (!window.confirm(`¿Confirmas que deseas eliminar el área “${activeDepartment}” y todos sus programas? Esta acción no se puede deshacer.`)) {
+    carAreaMessage.textContent = "La eliminación fue cancelada. El área se mantiene sin cambios.";
     return;
   }
   carDepartments = carDepartments.filter(department => department !== activeDepartment);
@@ -513,7 +490,7 @@ deleteCarAreaButton.addEventListener("click", async () => {
   selectedDepartments.clear();
   saveCarDepartments();
   localStorage.setItem(brandProgramsStorageKey, JSON.stringify(brandProgramRecords));
-  await syncRemoteState(carAreaPassword.value);
+  await syncRemoteState();
   carAreaForm.reset();
   carAreaMessage.textContent = `El área “${activeDepartment}” y sus programas fueron eliminados.`;
   resetProgramForm();
@@ -526,14 +503,13 @@ programForm.addEventListener("submit", async event => {
   const name = programName.value.trim();
   const activityIds = [...programForm.querySelectorAll('input[name="programActivity"]:checked')].map(input => input.value);
   const department = selectedBrand === "car" ? [...selectedDepartments][0] || "" : "";
-  const password = programPassword.value;
-  if (!await verifyAdminPassword(password)) {
-    programFormMessage.textContent = "Clave incorrecta. El programa no fue guardado.";
-    programPassword.select();
-    return;
-  }
   if (!name) return;
   if (selectedBrand === "car" && !department) return;
+  const action = editingProgramId ? `guardar los cambios de “${name}”` : `añadir el programa “${name}”`;
+  if (!window.confirm(`¿Confirmas que deseas ${action}?`)) {
+    programFormMessage.textContent = "La acción fue cancelada. No se realizaron cambios.";
+    return;
+  }
   if (editingProgramId) {
     const record = brandProgramRecords.find(item => item.id === editingProgramId);
     if (record) Object.assign(record, { name, activityIds, department, updatedAt: Date.now() });
@@ -541,7 +517,7 @@ programForm.addEventListener("submit", async event => {
     brandProgramRecords.push({ id: `program-${Date.now()}-${Math.random().toString(16).slice(2)}`, brandId: selectedBrand, department, name, activityIds, createdAt: Date.now() });
   }
   localStorage.setItem(brandProgramsStorageKey, JSON.stringify(brandProgramRecords));
-  await syncRemoteState(password);
+  await syncRemoteState();
   resetProgramForm();
   renderBrandPrograms();
 });
@@ -568,7 +544,7 @@ programList.addEventListener("click", event => {
   programAuthMessage.textContent = "";
   programAuthDialog.querySelector(".program-delete-name").textContent = record?.name || "este programa";
   programAuthDialog.showModal();
-  setTimeout(() => programDeletePassword.focus(), 50);
+  setTimeout(() => programAuthDialog.querySelector(".program-auth-cancel").focus(), 50);
 });
 
 function closeProgramAuthDialog() {
@@ -583,19 +559,13 @@ document.querySelector(".program-auth-cancel").addEventListener("click", closePr
 programAuthDialog.addEventListener("click", event => { if (event.target === programAuthDialog) closeProgramAuthDialog(); });
 programAuthForm.addEventListener("submit", async event => {
   event.preventDefault();
-  const password = programDeletePassword.value;
-  if (!await verifyAdminPassword(password)) {
-    programAuthMessage.textContent = "Clave incorrecta. El programa se mantiene sin cambios.";
-    programDeletePassword.select();
-    return;
-  }
   const id = pendingProgramDeleteId;
   const button = programAuthForm.querySelector(".program-auth-confirm");
   button.disabled = true;
   try {
     brandProgramRecords = brandProgramRecords.filter(item => item.id !== id);
     localStorage.setItem(brandProgramsStorageKey, JSON.stringify(brandProgramRecords));
-    await syncRemoteState(password);
+    await syncRemoteState();
     if (editingProgramId === id) resetProgramForm();
     closeProgramAuthDialog();
     renderBrandPrograms();
@@ -1013,7 +983,7 @@ uploadedList.addEventListener("click", event => {
   deleteMessage.textContent = "";
   deleteDialog.querySelector(".delete-activity-name").textContent = item.shortTitle;
   deleteDialog.showModal();
-  setTimeout(() => deletePassword.focus(), 50);
+  setTimeout(() => deleteDialog.querySelector(".delete-cancel").focus(), 50);
 });
 
 function openRenameDialog(id) {
@@ -1043,9 +1013,8 @@ renameForm.addEventListener("submit", async event => {
   const item = activities.find(activity => activity.id === pendingRenameId);
   const newName = renameActivityName.value.trim();
   if (!item || !newName) return;
-  if (!await verifyAdminPassword(renamePassword.value)) {
-    renameMessage.textContent = "Clave incorrecta. El nombre se mantiene sin cambios.";
-    renamePassword.select();
+  if (!window.confirm(`¿Confirmas que deseas cambiar el nombre de “${item.shortTitle}” a “${newName}”?`)) {
+    renameMessage.textContent = "La edición fue cancelada. El nombre se mantiene sin cambios.";
     return;
   }
   const confirmButton = renameForm.querySelector(".rename-confirm");
@@ -1055,7 +1024,7 @@ renameForm.addEventListener("submit", async event => {
     item.title = newName;
     item.shortTitle = newName;
     if (remoteMode) {
-      await remoteRequest("rename", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id: item.id, name: newName, password: renamePassword.value }) });
+      await remoteRequest("rename", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id: item.id, name: newName }) });
       if (!item.uploaded) {
         renamedActivities[item.id] = newName;
         localStorage.setItem(renamedStorageKey, JSON.stringify(renamedActivities));
@@ -1093,11 +1062,6 @@ deleteDialog.addEventListener("click", event => { if (event.target === deleteDia
 deleteForm.addEventListener("submit", async event => {
   event.preventDefault();
   if (!pendingDeleteId) return;
-  if (!await verifyAdminPassword(deletePassword.value)) {
-    deleteMessage.textContent = "Clave incorrecta. La ficha se mantiene sin cambios.";
-    deletePassword.select();
-    return;
-  }
   const id = pendingDeleteId;
   const confirmButton = deleteForm.querySelector(".delete-confirm");
   confirmButton.disabled = true;
@@ -1105,7 +1069,7 @@ deleteForm.addEventListener("submit", async event => {
   try {
     const item = activities.find(activity => activity.id === id);
     if (remoteMode) {
-      await remoteRequest("activity", { method: "DELETE", headers: { "content-type": "application/json" }, body: JSON.stringify({ id, password: deletePassword.value }) });
+      await remoteRequest("activity", { method: "DELETE", headers: { "content-type": "application/json" }, body: JSON.stringify({ id }) });
       if (!item?.uploaded) {
         deletedActivityIds.add(id);
         localStorage.setItem(deletedStorageKey, JSON.stringify([...deletedActivityIds]));

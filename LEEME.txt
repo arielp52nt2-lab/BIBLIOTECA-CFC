@@ -22,14 +22,8 @@ CAMBIOS DE ESTA VERSIÓN
 - Si no se activa la opción de niveles, la ficha se genera normalmente sin ese bloque.
 - Se mantiene la cuadrícula opcional al final de los Dispositivos.
 - Toda la experiencia continúa funcionando en una sola pestaña.
-- La clave administrativa ya no está escrita en los archivos públicos del sitio.
-- Netlify valida las acciones protegidas mediante una variable de entorno privada.
-
-CONFIGURAR LA CLAVE EN NETLIFY
-1. Abre Site configuration > Environment variables en tu sitio de Netlify.
-2. Crea una variable llamada CFC_ADMIN_PASSWORD.
-3. Coloca como valor la clave administrativa acordada.
-4. Vuelve a desplegar el sitio para activar la validación.
+- Las acciones de crear, editar y eliminar ya no solicitan claves.
+- Antes de aplicar un cambio importante, el portal muestra una confirmación que permite continuar o cancelar sin modificar la información.
 
 PUBLICAR CON NETLIFY DROP
 1. Inicia sesión en tu cuenta de Netlify.

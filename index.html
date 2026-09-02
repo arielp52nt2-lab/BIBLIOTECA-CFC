@@ -9,7 +9,7 @@
   <meta name="description" content="Biblioteca interactiva de activadores y dispositivos para crear experiencias de aprendizaje memorables.">
   <link rel="stylesheet" href="css/styles.css?v=35-uiux">
   <script src="js/data.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <script src="js/app.js?v=36-confirmaciones" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -106,7 +106,6 @@
           <form id="carAreaForm">
             <div class="car-area-fields">
               <label for="carAreaName"><span>Nombre del área</span><input id="carAreaName" type="text" maxlength="60" placeholder="Ej.: Operaciones"></label>
-              <label for="carAreaPassword"><span>Clave de seguridad</span><input id="carAreaPassword" type="password" autocomplete="off" placeholder="Clave requerida" required></label>
             </div>
             <p class="car-area-message" aria-live="polite"></p>
             <div class="car-area-actions">
@@ -134,8 +133,6 @@
               <p>Selecciona todas las experiencias que formaron parte del programa.</p>
               <div class="program-device-options"></div>
             </fieldset>
-            <label for="programPassword">Clave de seguridad</label>
-            <input id="programPassword" name="programPassword" type="password" autocomplete="off" placeholder="Clave requerida para guardar" required>
             <p class="program-form-message" aria-live="polite"></p>
             <div class="program-form-actions">
               <button class="cancel-program-edit" type="button" hidden>Cancelar edición</button>
@@ -477,7 +474,7 @@
           </div>
           <span class="uploaded-count">0 fichas</span>
         </div>
-        <p class="uploaded-manager-note">Administra los nombres o elimina fichas originales y añadidas desde el portal. Ambas acciones requieren la clave de seguridad.</p>
+        <p class="uploaded-manager-note">Administra los nombres o elimina fichas originales y añadidas desde el portal. Antes de aplicar un cambio, podrás confirmarlo o cancelarlo.</p>
         <div class="uploaded-list"></div>
         <p class="uploaded-empty">No existen fichas disponibles para administrar.</p>
       </section>
@@ -489,13 +486,11 @@
     <form class="rename-shell" id="renameForm">
       <button class="close-rename-dialog" type="button" aria-label="Cancelar edición">×</button>
       <span class="rename-icon" aria-hidden="true">✎</span>
-      <p class="eyebrow"><span></span> Edición protegida</p>
+      <p class="eyebrow"><span></span> Confirmación de edición</p>
       <h2 id="renameTitle">Cambiar nombre de la ficha</h2>
       <p>Solo se modificará el nombre. El contenido y la categoría permanecerán sin cambios.</p>
       <label for="renameActivityName">Nuevo nombre</label>
       <input id="renameActivityName" name="renameActivityName" type="text" maxlength="100" required>
-      <label for="renamePassword">Clave de seguridad</label>
-      <input id="renamePassword" name="renamePassword" type="password" autocomplete="off" required>
       <p class="rename-message" aria-live="polite"></p>
       <div class="rename-actions">
         <button class="rename-cancel" type="button">Cancelar</button>
@@ -508,11 +503,9 @@
     <form class="program-auth-shell" id="programAuthForm">
       <button class="close-program-auth-dialog" type="button" aria-label="Cancelar eliminación">×</button>
       <span class="program-auth-lock" aria-hidden="true">⌁</span>
-      <p class="eyebrow"><span></span> Acción protegida</p>
+      <p class="eyebrow"><span></span> Confirmar eliminación</p>
       <h2 id="programAuthTitle">Eliminar programa</h2>
-      <p>Ingresa la clave de seguridad para eliminar <strong class="program-delete-name"></strong>.</p>
-      <label for="programDeletePassword">Clave de seguridad</label>
-      <input id="programDeletePassword" type="password" autocomplete="off" required>
+      <p>¿Confirmas que deseas eliminar <strong class="program-delete-name"></strong>? Esta acción no se puede deshacer.</p>
       <p class="program-auth-message" aria-live="polite"></p>
       <div class="program-auth-actions">
         <button class="program-auth-cancel" type="button">Conservar programa</button>
@@ -525,11 +518,9 @@
     <form class="delete-shell" id="deleteForm">
       <button class="close-delete-dialog" type="button" aria-label="Cancelar eliminación">×</button>
       <span class="delete-lock" aria-hidden="true">⌁</span>
-      <p class="eyebrow"><span></span> Acción protegida</p>
+      <p class="eyebrow"><span></span> Confirmar eliminación</p>
       <h2 id="deleteTitle">Eliminar ficha definitivamente</h2>
-      <p>Ingresa la clave de seguridad para eliminar <strong class="delete-activity-name"></strong>. Si la clave no es correcta, no se realizará ningún cambio.</p>
-      <label for="deletePassword">Clave de seguridad</label>
-      <input id="deletePassword" name="deletePassword" type="password" autocomplete="off" required>
+      <p>¿Confirmas que deseas eliminar definitivamente <strong class="delete-activity-name"></strong>? Esta acción no se puede deshacer.</p>
       <p class="delete-message" aria-live="polite"></p>
       <div class="delete-actions">
         <button class="delete-cancel" type="button">Conservar ficha</button>
