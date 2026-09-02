@@ -1371,6 +1371,137 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
   .program-card-actions { width: 100%; flex-direction: column; }
   .program-card-actions button { width: 100%; }
 }
+
+/* Auditoría UI/UX 2026: ritmo, alineación y adaptación multipantalla. */
+:root {
+  --content-max: 1320px;
+  --page-gutter: clamp(24px,5vw,72px);
+  --mobile-gutter: 16px;
+}
+
+.hero,.search-zone,.about,.category-showcase,footer {
+  padding-left: max(var(--page-gutter),calc((100vw - var(--content-max))/2));
+  padding-right: max(var(--page-gutter),calc((100vw - var(--content-max))/2));
+}
+
+.activity-card,.showcase-card,.about-mark,.brand-card,.program-card,
+.search-box,.filter-panel,.create-fields,.uploaded-item {
+  min-width: 0;
+}
+
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible {
+  outline: 3px solid rgba(185,28,41,.3);
+  outline-offset: 3px;
+}
+
+.main-nav a,.main-nav button,.button,.quick-tab,.filter-toggle,.view-detail,
+.favorite-button,.edit-card-name,.department-button,.back-to-top {
+  min-height: 44px;
+}
+
+.card-body > p,.showcase-copy > span,.about-copy > p:not(.eyebrow),
+.detail-content p,.detail-list li {
+  text-wrap: pretty;
+}
+
+@media (min-width: 621px) and (max-width: 1080px) {
+  .hero,.search-zone,.about,.category-showcase,footer { padding-left: 32px; padding-right: 32px; }
+  .hero { gap: 34px; }
+  .hero-visual { max-width: 760px; }
+  .search-zone { padding-top: 90px; padding-bottom: 90px; }
+}
+
+@media (max-width: 620px) {
+  html { scroll-padding-top: 86px; }
+  body { width: 100%; }
+  .topbar {
+    top: 8px;
+    width: calc(100% - 16px);
+    height: 68px;
+    min-height: 68px;
+    padding: 8px 10px 8px 12px;
+    border-radius: 17px;
+  }
+  .rrhh-header-brand { width: min(150px,48vw); }
+  .rrhh-header-brand img { height: 44px; }
+  .hero,.search-zone,.about,.category-showcase,footer {
+    padding-left: var(--mobile-gutter);
+    padding-right: var(--mobile-gutter);
+  }
+  .hero {
+    min-height: 0;
+    padding-top: 118px;
+    padding-bottom: 48px;
+    gap: 24px;
+  }
+  .eyebrow { margin-bottom: 18px; font-size: 8px; line-height: 1.5; }
+  .hero h1 { max-width: 100%; font-size: clamp(44px,13.2vw,58px); line-height: .94; letter-spacing: -.062em; }
+  .hero-lead { margin: 24px 0; font-size: 14px; line-height: 1.7; }
+  .hero-actions { gap: 8px; }
+  .button { min-height: 54px; padding: 0 18px; font-size: 11px; }
+  .hero-stats { margin-top: 34px; padding-top: 18px; gap: 6px; }
+  .hero-stats div { min-height: 68px; padding: 10px 8px; justify-content: center; }
+  .hero-stats span { font-size: 8px; line-height: 1.35; }
+  .hero-visual { min-height: 300px; }
+  .logo-platform { width: min(92vw,350px); }
+  .search-zone { padding-top: 64px; padding-bottom: 64px; }
+  .search-heading > p:last-child { margin-top: 16px; font-size: 13px; line-height: 1.65; }
+  .search-shell { margin-top: 32px; }
+  .search-box { height: 60px; border-radius: 17px; }
+  .search-box input { font-size: 16px; }
+  .catalog-toolbar { gap: 12px; }
+  .quick-tabs { width: calc(100vw - 32px); scrollbar-width: thin; }
+  .quick-tab,.filter-toggle { flex: 0 0 auto; font-size: 10px; }
+  .results-row { margin-top: 38px; }
+  .activity-grid { gap: 14px; }
+  .activity-card { border-radius: 20px; }
+  .card-body { padding: 20px; }
+  .card-body h3 { line-height: 1.12; }
+  .card-body > p { font-size: 12px; line-height: 1.6; }
+  .card-meta span { min-height: 32px; font-size: 9px; }
+  .card-footer small { max-width: calc(100% - 92px); font-size: 8px; line-height: 1.45; }
+  .category-showcase { padding-top: 32px; padding-bottom: 32px; gap: 14px; }
+  .showcase-card,.device-showcase { padding: 32px 20px 38px; }
+  .showcase-card h2 { font-size: clamp(43px,13vw,58px); overflow-wrap: anywhere; }
+  .showcase-copy > span { font-size: 12px; line-height: 1.7; }
+  .showcase-card a { margin-top: 22px; }
+  .about { padding-top: 64px; padding-bottom: 64px; gap: 34px; }
+  .about-copy h2 { font-size: clamp(43px,13vw,58px); }
+  .about-copy > p:not(.eyebrow) { font-size: 13px; line-height: 1.75; }
+  footer { min-height: 0; padding-top: 30px; padding-bottom: 58px; gap: 18px; }
+  footer .footer-brand { width: min(300px,100%); }
+  .footer-center { min-width: 0; }
+  .back-to-top { min-height: 58px; }
+  .brands-section { width: calc(100% - 12px); padding: 22px 14px; }
+  .brands-heading { margin-bottom: 24px; padding-right: 42px; gap: 16px; }
+  .brands-intro p { font-size: 12px; line-height: 1.65; }
+  .brand-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .brand-card { min-height: 190px; }
+  .brand-logo-stage { padding: 8px; }
+  .brand-card-info { padding-top: 11px; }
+  .brand-card-info small { font-size: 7px; }
+  .brand-card-info strong { font-size: 12px; }
+  .department-button { min-height: 54px; font-size: 11px; }
+  .program-form,.program-library { border-radius: 17px; }
+  .program-device-options label > span { min-height: 56px; }
+  .upload-shell { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+  .create-fields { padding: 16px; border-radius: 16px; }
+  .create-field-grid { gap: 13px; }
+  .create-field-grid label,.inclusion-options label { font-size: 10px; }
+  .inclusion-options label { min-height: 48px; }
+  .uploaded-manager-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .detail-banner,.detail-content { padding-left: 20px; padding-right: 20px; }
+  .detail-content { padding-top: 38px; padding-bottom: 42px; }
+  .detail-content h2 { margin-top: 38px; font-size: 25px; line-height: 1.1; }
+  .detail-content p,.detail-list li { font-size: 13px; }
+  .download-panel { margin-left: 16px; margin-right: 16px; }
+}
+
+@media (max-width: 390px) {
+  .brand-grid { grid-template-columns: 1fr; }
+  .brand-card { min-height: 230px; }
+  .hero h1 { font-size: clamp(42px,12.4vw,48px); }
+}
 @media print {
   @page { size: A4; margin: 10mm; }
   html,body { width: auto !important; overflow: visible !important; }
