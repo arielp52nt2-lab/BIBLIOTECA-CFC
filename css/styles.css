@@ -1262,7 +1262,8 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
   .search-box kbd { display: none; }
   .quick-tabs { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; padding-bottom: 5px; }
   .quick-tab { white-space: nowrap; }
-  .filter-panel, .filter-panel.open { grid-template-columns: 1fr; max-height: 780px; }
+  .filter-panel { grid-template-columns: 1fr; max-height: 0; }
+  .filter-panel.open { max-height: 780px; }
   .results-row span { display: none; }
   .activity-grid { grid-template-columns: 1fr; }
   .activity-card { min-width: 0; }
