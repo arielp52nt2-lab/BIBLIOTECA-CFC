@@ -329,6 +329,25 @@
       <h2 id="uploadTitle">Crear una nueva ficha</h2>
       <p class="upload-intro">Selecciona el tipo de experiencia y completa sus campos. La tarjeta y la ficha visual se crearán automáticamente con el diseño del portal.</p>
 
+      <section class="upload-templates" aria-labelledby="templateGuideTitle">
+        <div class="template-guide-heading">
+          <span aria-hidden="true">01</span>
+          <div><small>Guía visual oficial</small><h3 id="templateGuideTitle">Descarga el formato antes de comenzar</h3><p>Utiliza la plantilla correspondiente para organizar la información con la misma presentación de la plataforma.</p></div>
+        </div>
+        <div class="template-download-grid">
+          <a href="descargas/Formato_Visual_Ficha_Activador_CFC.docx" download>
+            <span class="template-icon" aria-hidden="true">⚡</span>
+            <span><b>Formato visual de activador</b><small>Documento Word editable</small></span>
+            <strong aria-hidden="true">↓</strong>
+          </a>
+          <a href="descargas/Formato_Visual_Ficha_Dispositivo_CFC.docx" download>
+            <span class="template-icon" aria-hidden="true">◆</span>
+            <span><b>Formato visual de dispositivo</b><small>Documento Word editable</small></span>
+            <strong aria-hidden="true">↓</strong>
+          </a>
+        </div>
+      </section>
+
       <fieldset class="upload-type-picker">
         <legend>1. ¿Qué deseas crear?</legend>
         <label>
@@ -445,6 +464,24 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="create-fields final-file-upload" aria-labelledby="finalUploadTitle">
+        <div class="upload-section-heading"><span>07</span><div><small>Último paso</small><h3 id="finalUploadTitle">Cargar ficha</h3></div></div>
+        <p class="final-file-help">Si completaste el formato visual, adjúntalo aquí. Se conservará junto con la ficha creada para que puedas consultarlo y descargarlo posteriormente.</p>
+        <label class="final-file-picker" data-create-type="activador">
+          <input name="activatorSourceFile" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,application/pdf">
+          <span class="final-file-icon" aria-hidden="true">⚡</span>
+          <span><b>Cargar ficha de activador</b><small>Selecciona el archivo Word o PDF completado</small></span>
+          <strong>Elegir archivo</strong>
+        </label>
+        <label class="final-file-picker" data-create-type="dispositivo" hidden>
+          <input name="deviceSourceFile" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,application/pdf" disabled>
+          <span class="final-file-icon device" aria-hidden="true">◆</span>
+          <span><b>Cargar ficha de dispositivo</b><small>Selecciona el archivo Word o PDF completado</small></span>
+          <strong>Elegir archivo</strong>
+        </label>
+        <p class="selected-source-file" aria-live="polite">Ningún archivo seleccionado.</p>
       </section>
 
       <p class="upload-message" aria-live="polite"></p>

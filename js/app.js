@@ -77,6 +77,7 @@ const uploadDialog = document.querySelector("#uploadDialog");
 const uploadForm = document.querySelector("#uploadForm");
 const uploadName = document.querySelector("#activityName");
 const uploadMessage = document.querySelector(".upload-message");
+const selectedSourceFile = document.querySelector(".selected-source-file");
 const downloadBackupButton = document.querySelector(".download-backup");
 const restoreBackupButton = document.querySelector(".restore-backup");
 const restoreBackupFile = document.querySelector(".restore-backup-file");
@@ -1143,9 +1144,23 @@ function syncCreateType() {
   const typeNumber = uploadForm.querySelector(`[data-create-type='${category}'] .upload-section-heading > span`);
   if (typeNumber) typeNumber.textContent = category === "activador" ? "04" : "06";
   syncInclusionFields();
+  syncSelectedSourceFile();
+}
+
+function activeSourceFile() {
+  const category = new FormData(uploadForm).get("uploadCategory") || "activador";
+  return uploadForm.elements.namedItem(category === "activador" ? "activatorSourceFile" : "deviceSourceFile")?.files?.[0] || null;
+}
+
+function syncSelectedSourceFile() {
+  if (!selectedSourceFile) return;
+  const file = activeSourceFile();
+  selectedSourceFile.textContent = file ? `Archivo seleccionado: ${file.name}` : "Ningún archivo seleccionado.";
+  selectedSourceFile.classList.toggle("has-file", Boolean(file));
 }
 
 uploadForm.querySelectorAll("input[name='uploadCategory']").forEach(radio => radio.addEventListener("change", syncCreateType));
+uploadForm.querySelectorAll("input[type='file'][name$='SourceFile']").forEach(input => input.addEventListener("change", syncSelectedSourceFile));
 uploadForm.querySelectorAll("input[name='includeSections']").forEach(checkbox => checkbox.addEventListener("change", syncInclusionFields));
 syncCreateType();
 
@@ -1353,6 +1368,12 @@ uploadForm.addEventListener("submit", async event => {
     uploaded: true,
     createdInPortal: true
   };
+  const sourceFile = activeSourceFile();
+  if (sourceFile) {
+    item.fileName = sourceFile.name;
+    item.fileType = sourceFile.type;
+    item.fileBlob = sourceFile;
+  }
   const submitButton = uploadForm.querySelector(".upload-submit");
   submitButton.disabled = true;
   uploadMessage.textContent = "Creando la tarjeta y la ficha visual…";

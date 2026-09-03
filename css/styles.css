@@ -934,6 +934,11 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
 .upload-shell h2 { max-width: 470px; margin: 12px 0 12px; font: 700 clamp(34px,5vw,52px)/.98 "DM Serif Display",serif; }
 .upload-intro { max-width: 530px; margin: 0 0 30px; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .upload-templates { margin-bottom: 28px; padding: 20px; border: 1px solid #dadad6; border-radius: 18px; background: white; }
+.template-guide-heading { margin-bottom: 15px; display: grid; grid-template-columns: 42px minmax(0,1fr); gap: 12px; align-items: start; }
+.template-guide-heading > span { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; color: white; background: var(--black); font-size: 10px; font-weight: 800; }
+.template-guide-heading small { display: block; margin-bottom: 3px; color: var(--red); font-size: 7px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.template-guide-heading h3 { margin: 0; font-size: 17px; }
+.template-guide-heading p { margin: 5px 0 0; color: #707176; font-size: 9px; line-height: 1.5; }
 .upload-section-heading { margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
 .upload-section-heading > span { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 10px; color: white; background: var(--red); font: 800 9px "Manrope",sans-serif; }
 .upload-section-heading small { display: block; color: var(--red); font-size: 7px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
@@ -946,6 +951,18 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
 .template-download-grid b { display: block; font-size: 9px; line-height: 1.25; }
 .template-download-grid small { display: block; margin-top: 4px; color: #77787b; font-size: 7px; }
 .template-download-grid a > strong { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 8px; color: var(--red); background: white; font-size: 14px; }
+.final-file-upload { margin-top: 24px; border-color: #d8c8ca; background: linear-gradient(145deg,#fff 0%,#fbf4f5 100%); }
+.final-file-help { margin: -2px 0 15px; color: #6f7074; font-size: 9px; line-height: 1.55; }
+.final-file-picker { position: relative; min-height: 88px; padding: 14px; display: grid; grid-template-columns: 46px minmax(0,1fr) auto; gap: 12px; align-items: center; border: 1px dashed #c7b7b9; border-radius: 15px; background: rgba(255,255,255,.86); cursor: pointer; transition: .22s ease; }
+.final-file-picker:hover { border-color: var(--red); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(111,11,24,.08); }
+.final-file-picker input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.final-file-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; color: white; background: linear-gradient(145deg,#ef6a91,#c4163a); font-size: 18px; box-shadow: 0 7px 16px rgba(196,22,58,.2); }
+.final-file-icon.device { background: linear-gradient(145deg,#347fbb,#174e7c); box-shadow: 0 7px 16px rgba(36,95,146,.2); }
+.final-file-picker b { display: block; font-size: 10px; }
+.final-file-picker small { display: block; margin-top: 4px; color: #77787b; font-size: 8px; }
+.final-file-picker > strong { padding: 10px 13px; border-radius: 10px; color: white; background: var(--black); font-size: 8px; text-transform: uppercase; letter-spacing: .06em; }
+.selected-source-file { margin: 9px 2px 0; color: #77787b; font-size: 8px; }
+.selected-source-file.has-file { color: #18704b; font-weight: 700; }
 .upload-type-picker { margin: 0 0 24px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 0; }
 .upload-type-picker legend, .upload-file-group > label:first-child, .upload-name-field > span {
   grid-column: 1 / -1;
@@ -1336,6 +1353,11 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
   .experience-level-title { align-items: flex-start; flex-direction: column; gap: 6px; }
   .grid-builder-fields { padding: 16px 12px; }
   .template-download-grid { grid-template-columns: 1fr; }
+  .template-guide-heading { grid-template-columns: 36px minmax(0,1fr); }
+  .template-guide-heading > span { width: 36px; height: 36px; }
+  .final-file-picker { grid-template-columns: 42px minmax(0,1fr); }
+  .final-file-picker > strong { grid-column: 1 / -1; text-align: center; }
+  .final-file-icon { width: 42px; height: 42px; }
   .upload-actions { align-items: stretch; flex-direction: column-reverse; }
   .upload-actions button { width: 100%; justify-content: center; }
   .backup-actions { align-items: stretch; flex-direction: column; }
