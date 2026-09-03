@@ -7,26 +7,26 @@
   <meta name="theme-color" content="#f7f7f5">
   <title>Experiencias CFC | Centro de Formación Continua</title>
   <meta name="description" content="Biblioteca interactiva de activadores y dispositivos para crear experiencias de aprendizaje memorables.">
-  <link rel="stylesheet" href="css/styles.css?v=36-filtros-movil">
+  <link rel="stylesheet" href="css/styles.css?v=37-catalogos">
   <script src="js/data.js" defer></script>
-  <script src="js/app.js?v=36-confirmaciones" defer></script>
+  <script src="js/app.js?v=37-catalogos" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand rrhh-header-brand" href="#inicio" aria-label="Recursos Humanos, ir al inicio">
+    <a class="brand rrhh-header-brand" href="./#inicio" aria-label="Recursos Humanos, ir al inicio">
       <img class="rrhh-brand-logo" src="assets/logo-rrhh-3d-transparente.png" alt="Recursos Humanos Grupo KFC">
     </a>
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span>
     </button>
     <nav class="main-nav" aria-label="Navegación principal">
-      <a class="active" href="#inicio">Inicio</a>
+      <a class="active" href="./#inicio">Inicio</a>
       <button class="brands-menu-button" type="button" data-brands-toggle aria-expanded="false" aria-controls="marcas">Marcas <span class="nav-brand-selection"></span></button>
-      <a href="#catalogo" data-nav-filter="activador">Activadores</a>
-      <a href="#catalogo" data-nav-filter="dispositivo">Dispositivos</a>
-      <a href="#catalogo" data-nav-filter="favoritos">Favoritos <span class="favorite-count">0</span></a>
+      <a href="?categoria=activador#catalogo" data-nav-filter="activador">Activadores</a>
+      <a href="?categoria=dispositivo#catalogo" data-nav-filter="dispositivo">Dispositivos</a>
+      <a href="?categoria=favoritos#catalogo" data-nav-filter="favoritos">Favoritos <span class="favorite-count">0</span></a>
       <button class="mobile-upload-action" type="button" data-upload-toggle>Crear ficha</button>
-      <a href="#acerca">Acerca del CFC</a>
+      <a href="./#acerca">Acerca del CFC</a>
     </nav>
     <button class="nav-action upload-nav-action" type="button" data-upload-toggle>Crear ficha <span>＋</span></button>
   </header>
@@ -46,8 +46,8 @@
         <h1>Experiencias que <em>activan</em> el aprendizaje.</h1>
         <p class="hero-lead">Un espacio que reúne herramientas, actividades y recursos para diseñar encuentros más creativos, humanos y memorables.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#catalogo" data-nav-filter="activador">Explorar Activadores <span>→</span></a>
-          <a class="button button-light" href="#catalogo" data-nav-filter="dispositivo">Explorar Dispositivos <span>↘</span></a>
+          <a class="button button-primary" href="?categoria=activador#catalogo" data-nav-filter="activador">Explorar Activadores <span>→</span></a>
+          <a class="button button-light" href="?categoria=dispositivo#catalogo" data-nav-filter="dispositivo">Explorar Dispositivos <span>↘</span></a>
         </div>
         <div class="hero-stats" aria-label="Resumen de la biblioteca">
           <div><strong>∞</strong><span>Experiencias disponibles</span></div>
@@ -150,7 +150,7 @@
       </section>
     </section>
 
-    <section class="search-zone" id="catalogo">
+    <section class="search-zone" id="catalogo" hidden>
       <div class="search-heading reveal">
         <p class="eyebrow"><span></span> Biblioteca interactiva</p>
         <h2>Encuentra la experiencia adecuada.</h2>
@@ -267,7 +267,7 @@
           <p>01 · Activa el momento</p>
           <h2>Activadores</h2>
           <span>Experiencias breves que ponen al grupo en movimiento, ayudan a soltar barreras, generar confianza y abrirse al encuentro con los demás, creando el espacio para explorar nuevas formas de pensar, relacionarse y actuar.</span>
-          <a href="#catalogo" data-nav-filter="activador">Descubrir activadores <b>→</b></a>
+          <a href="?categoria=activador#catalogo" data-nav-filter="activador">Descubrir activadores <b>→</b></a>
         </div>
       </article>
       <article class="showcase-card device-showcase reveal">
@@ -275,7 +275,7 @@
           <p>02 · Transforma la experiencia</p>
           <h2>Dispositivos</h2>
           <span>Propuestas experienciales que invitan a involucrarse, asumir retos y salir de los espacios habituales, poniendo a prueba perspectivas, generando aprendizajes significativos y abriendo posibilidades para transformar la manera de pensar, relacionarse y actuar.</span>
-          <a href="#catalogo" data-nav-filter="dispositivo">Descubrir dispositivos <b>→</b></a>
+          <a href="?categoria=dispositivo#catalogo" data-nav-filter="dispositivo">Descubrir dispositivos <b>→</b></a>
         </div>
         <div class="showcase-visual device-visual" aria-hidden="true">
           <span class="visual-orbit orbit-one"></span>

@@ -546,6 +546,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes backdropIn { from { opacity: 0; } to { opacity: 1; } }
 
 .search-zone { padding: 120px max(5vw,28px); background: white; }
+.search-zone[hidden] { display: none; }
+.catalog-view .hero,
+.catalog-view .category-showcase,
+.catalog-view .about { display: none; }
+.catalog-view .search-zone { min-height: 100vh; padding-top: 150px; }
 .search-heading { max-width: 780px; }
 .search-heading h2, .about h2 {
   margin: 0;

@@ -249,6 +249,9 @@ const state = {
   audience: ""
 };
 
+const catalogCategories = new Set(["todos", "activador", "dispositivo", "favoritos"]);
+const requestedCatalogCategory = new URLSearchParams(window.location.search).get("categoria");
+
 let favorites = new Set(JSON.parse(localStorage.getItem("cfc-favoritos") || "[]"));
 
 const brands = [
@@ -681,6 +684,13 @@ function setCategory(category) {
     tab.classList.toggle("active", tab.dataset.filterCategory === category);
   });
   renderActivities();
+}
+
+function showCatalogView(category = "todos") {
+  const selectedCategory = catalogCategories.has(category) ? category : "todos";
+  document.body.classList.add("catalog-view");
+  document.querySelector("#catalogo").hidden = false;
+  setCategory(selectedCategory);
 }
 
 function updateFavoriteCounts() {
@@ -1373,7 +1383,7 @@ uploadForm.addEventListener("submit", async event => {
     setCategory(category);
     setTimeout(() => {
       closeUploadDialog();
-      document.querySelector("#catalogo").scrollIntoView({ behavior: "smooth" });
+      window.location.href = `?categoria=${encodeURIComponent(category)}#catalogo`;
     }, 650);
   } catch (error) {
     uploadMessage.textContent = error.message || "No se pudo guardar la ficha. Inténtalo nuevamente.";
@@ -1398,7 +1408,7 @@ const sections = ["inicio", "catalogo", "acerca"].map(id => document.getElementB
 const navObserver = new IntersectionObserver(entries => entries.forEach(entry => {
   if (!entry.isIntersecting) return;
   document.querySelectorAll(".main-nav a").forEach(link => link.classList.remove("active"));
-  const target = entry.target.id === "catalogo" ? document.querySelector('.main-nav a[href="#catalogo"]') : document.querySelector(`.main-nav a[href="#${entry.target.id}"]`);
+  const target = entry.target.id === "catalogo" ? document.querySelector(`.main-nav [data-nav-filter="${state.category}"]`) : document.querySelector(`.main-nav a[href$="#${entry.target.id}"]`);
   target?.classList.add("active");
 }), { rootMargin: "-35% 0px -60%" });
 sections.forEach(section => navObserver.observe(section));
@@ -1410,6 +1420,7 @@ async function initializeLibrary() {
     console.info("El navegador administrará el almacenamiento local.");
   }
   await loadUploadedActivities();
+  if (catalogCategories.has(requestedCatalogCategory)) showCatalogView(requestedCatalogCategory);
   renderActivities();
   renderUploadedManager();
   syncFilterCount();
