@@ -807,19 +807,25 @@ function openDetail(id) {
   if (currentOriginalUrl) URL.revokeObjectURL(currentOriginalUrl);
   currentUploadedUrl = "";
   currentOriginalUrl = "";
-  originalButton.hidden = !item.uploaded || item.createdInPortal;
+  originalButton.hidden = true;
+  downloadButton.innerHTML = "Descargar ficha <span>↓</span>";
+  downloadButton.removeAttribute("download");
   if (item.uploaded) {
     sessionStorage.setItem("cfc-ficha-actual", JSON.stringify(item));
-    downloadButton.href = "ficha.html";
-    downloadButton.target = "_self";
-    downloadButton.removeAttribute("download");
     if (item.remoteFileUrl) {
-      originalButton.href = item.remoteFileUrl;
-      originalButton.download = item.fileName;
+      downloadButton.href = item.remoteFileUrl;
+      downloadButton.download = item.fileName || "ficha-cargada";
+      downloadButton.removeAttribute("target");
+      downloadButton.innerHTML = "Descargar archivo cargado <span>↓</span>";
     } else if (item.fileBlob) {
       currentOriginalUrl = URL.createObjectURL(item.fileBlob);
-      originalButton.href = currentOriginalUrl;
-      originalButton.download = item.fileName;
+      downloadButton.href = currentOriginalUrl;
+      downloadButton.download = item.fileName || "ficha-cargada";
+      downloadButton.removeAttribute("target");
+      downloadButton.innerHTML = "Descargar archivo cargado <span>↓</span>";
+    } else {
+      downloadButton.href = "ficha.html";
+      downloadButton.target = "_self";
     }
   } else {
     downloadButton.href = `descargas/${item.id}.html`;
