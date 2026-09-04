@@ -55,3 +55,210 @@ window.CFC_DATA = [
     "html": "<h2>Introducción</h2>\n<p class=\"\">(Luego de que los equipos completen las tres estaciones y reúnan sus reliquias: Varita de Saúco, la Piedra de la resurrección, y Capa de Invisibilidad)</p>\n<p class=\"\">Líderes del mundo mágico, han completado un viaje de transformación. A través de cada reliquia, han despertado en ustedes tres grandes poderes:</p>\n<p class=\"\">La Varita de Saúco: que representa el Poder</p>\n<p class=\"\">“El verdadero poder nace cuando eliges influir con amor y propósito. No se trata de tener control, sino de mantenerte firme en tus valores, servir desde la autenticidad y recordar que el poder más grande está en ser tú mismo.”</p>\n<p class=\"\">La Piedra de la Resurrección: símbolo del Amor:</p>\n<p class=\"\">“El amor es la fuerza que da sentido a todo. Es mirar con compasión, perdonar con el alma y conectar con lo esencial. Cuando actúas desde el amor, transformas lo que tocas y sanas lo que parecía imposible.”</p>\n<p class=\"\">La Capa de Invisibilidad: reflejo de la Razón:</p>\n<p class=\"\">La razón te enseña a encontrar equilibrio entre el silencio y la acción. No todo lo valioso se ve; a veces, la verdadera sabiduría está en actuar con humildad, en escuchar más que hablar y en dejar huellas sin buscar reconocimiento.”</p>\n<p class=\"\">Hoy no solo poseen las tres reliquias. Hoy son portadores de su propio poder: el de reconocer, agradecer y cerrar ciclos.</p>\n<p class=\"\">La Carta que Nunca He Enviado</p>\n<p class=\"lead\">Objetivo: Integrar lo aprendido a través de una carta significativa, conectando emociones, aprendizajes y gratitud.</p>\n<h2>Instrucciones</h2>\n<ul class=\"detail-list\">\n<li>Cada participante recibirá una hoja estilo carta de Hogwarts.</li>\n</ul>\n<p class=\"\">En este momento vamos a realizar una carta que nunca han enviado:</p>\n<ul class=\"detail-list\">\n<li>Puede ser para alguien que marcó su vida.</li>\n<li>Alguien a quien desean agradecer, perdonar o reconocer.</li>\n<li>Puede ser incluso para sí mismos, si sienten que es hora de hacerlo.</li>\n</ul>\n<p class=\"\">Se invita a los participantes a cerrar los ojos, mientras se pronuncia lo siguiente:</p>\n<h2>Storytelling: “La Carta que Nunca He Enviado”</h2>\n<p class=\"\">En el mundo mágico, hay cartas que nunca llegaron a su destino…</p>\n<p class=\"\">No porque se perdieran en el vuelo de una lechuza,</p>\n<ul class=\"detail-list\">\n<li>sino porque quedaron guardadas en el corazón, esperando el momento perfecto para ser escritas.</li>\n<li>Hoy, ese momento ha llegado.</li>\n<li>Frente a ti tienes una carta del estilo de Hogwarts, un símbolo de conexión, verdad y liberación.</li>\n<li>Esta no es una carta cualquiera.</li>\n</ul>\n<p class=\"\">Es la carta que nunca enviaste…</p>\n<p class=\"\">Aquella que guarda palabras no dichas, emociones que pedían ser escuchadas,</p>\n<ul class=\"detail-list\">\n<li>o agradecimientos que el tiempo dejó en silencio.</li>\n</ul>\n<p class=\"\">Puede ser una carta dirigida a alguien que marcó tu vida,</p>\n<p class=\"\">a alguien que desees perdonar, agradecer o reconocer…</p>\n<p class=\"\">O tal vez, sea una carta para ti mismo,</p>\n<p class=\"\">para reconciliarte con tu historia,</p>\n<p class=\"\">con tus decisiones,</p>\n<ul class=\"detail-list\">\n<li>con las veces que te callaste por miedo, o seguiste adelante sin darte crédito.</li>\n<li>No necesitas pensar demasiado.</li>\n<li>Solo escribe desde el alma.</li>\n</ul>\n<p class=\"\">Cada palabra será una varita que libera,</p>\n<p class=\"\">una piedra que conecta con el amor,</p>\n<ul class=\"detail-list\">\n<li>y una capa que envuelve la razón de tu propio camino.</li>\n</ul>\n<p class=\"\">Porque lo que no se dice, no existe</p>\n<ul class=\"detail-list\">\n<li>y lo que se escribe, se sana y se libera.</li>\n</ul>\n<p class=\"\">Que esta carta encuentre su destino,</p>\n<ul class=\"detail-list\">\n<li>aunque nunca salga de tus manos.</li>\n</ul>\n<p class=\"\">Deberán escribir desde la emoción, no desde la razón, conectando con todo lo que vivieron en esta experiencia La magia de servir: confianza, estrategia, humildad, liderazgo, equipo.</p>\n<ul class=\"detail-list\">\n<li>Nadie leerá su carta. Es un acto íntimo, personal y poderoso.</li>\n<li>Una vez terminada, la guardarán o la pueden entregar en este momento o cuando ustedes decidan.</li>\n<li>Tiempo sugerido: 10 minutos de escritura silenciosa, con música instrumental suave.</li>\n</ul>\n<h2>Ceremonia de Liberación</h2>\n<h2>Debriefing</h2>\n<p class=\"\">(El facilitador invita al grupo a cerrar los ojos o mantener silencio por unos segundos antes de iniciar la reflexión. Luego, con voz pausada, lanza las preguntas una a una, dejando tiempo para que cada participante conecte con lo que siente.)</p>\n<div class=\"questions\">\n<p><span>?</span>¿Qué sentiste al escribir esta carta?</p>\n<p><span>?</span>¿Qué emociones aparecieron cuando conectaste con esa persona o contigo mismo?</p>\n<p><span>?</span>¿Hubo algo que necesitabas soltar, perdonar o agradecer?</p>\n<p><span>?</span>¿Qué descubriste de ti al escribir desde la emoción y no desde la razón?</p>\n<p><span>?</span>¿Qué parte de esta experiencia te hizo sentir más humano, más consciente o más liviano?</p>\n</div>\n<ul class=\"detail-list\">\n<li>Si esta carta hablara, ¿qué crees que te estaría diciendo hoy?</li>\n</ul>\n<div class=\"questions\">\n<p><span>?</span>¿Qué te recuerdan las Reliquias del Líder (la confianza, la estrategia y la humildad) después de este momento?</p>\n<p><span>?</span>¿Cómo llevarás esta sensación a tu día a día, a tu equipo, a tu manera de servir?</p>\n</div>\n<h2>Cierre simbólico sugerido (palabras del facilitador)</h2>\n<ul class=\"detail-list\">\n<li>“Hoy no escribieron una carta cualquiera. Escribieron una parte de su historia.</li>\n<li>Y aunque nadie la lea, el universo, su corazón y esta experiencia ya fueron testigos.</li>\n</ul>\n<p class=\"\">Que cada palabra escrita se convierta en luz, en guía, y en recordatorio de que servir también es sanar.”</p>"
   }
 ];
+
+const cfcDevice = (device) => ({
+  category: "dispositivo",
+  label: "Dispositivo",
+  icon: "◇",
+  accent: "crimson",
+  mode: "presencial",
+  publicLabel: "Equipos",
+  nativeDynamic: true,
+  ...device
+});
+
+window.CFC_DATA.push(
+  cfcDevice({
+    id: "ronda-penales-al-ras",
+    title: "RONDA DE PENALES – AL RAS",
+    shortTitle: "Ronda de Penales · Al Ras",
+    summary: "Reforzar la precisión, la estrategia y la coordinación silenciosa para alcanzar una meta común, demostrando que cada aporte individual cuenta dentro de la alineación del equipo.",
+    duration: 45,
+    durationLabel: "45 min",
+    participants: 30,
+    participantsLabel: "Grupo completo",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["estrategia", "comunicacion"],
+    symbol: "◎",
+    keywords: "penales precisión estrategia coordinación silencio tornillos alineación",
+    html: `<p class="lead"><strong>Objetivo:</strong> Todos los tornillos deben alcanzar la misma altura en la menor cantidad de movimientos posible.</p>
+      <h2>Introducción</h2><p>En una ronda de penales cuentan la precisión, la estrategia y la capacidad de mantener la calma bajo presión. Cada persona entrará en orden, tendrá 10 segundos para actuar y decidirá si realiza uno o dos movimientos, sin hablar dentro del área de trabajo.</p>
+      <h2>Reglas</h2><ul class="detail-list"><li>Todos colaboran en un orden definido, una persona por visita.</li><li>Cada visita exige como mínimo un movimiento y permite como máximo dos.</li><li>No se puede hablar en el área de trabajo.</li><li>Cada participación dura máximo 10 segundos.</li><li>Las decisiones son compartidas y el trabajo es individual.</li><li>Referencia del reto: 100 movimientos en 45 minutos.</li></ul>
+      <h2>Movimientos permitidos</h2><p><strong>Un movimiento:</strong> insertar un tornillo, retirarlo o levantarlo y bajarlo a la misma posición.</p><p><strong>Dos movimientos:</strong> retirar un tornillo y colocarlo en otra posición, insertar dos tornillos o retirar dos tornillos.</p>
+      <h2>Debrief</h2><div class="questions"><p><span>1</span>¿Cómo decidieron cuándo realizar uno o dos movimientos?</p><p><span>2</span>¿Qué efecto tuvo cada decisión individual en el equipo completo?</p><p><span>3</span>¿Cómo lograron coordinarse sin palabras?</p><p><span>4</span>¿Qué situaciones laborales requieren precisión, confianza y estrategia compartida?</p><p><span>5</span>¿Qué aprendizaje pueden aplicar en su alineación de trabajo?</p></div>
+      <h2>Cierre</h2><p>Como en una definición por penales, cada decisión individual influye directamente en el resultado colectivo. La precisión, la disciplina y la confianza en una estrategia común permiten alinear los pasos de todos para alcanzar el mismo objetivo.</p>`
+  }),
+  cfcDevice({
+    id: "cosecha-aeropuerto",
+    title: "LA COSECHA DEL AEROPUERTO",
+    shortTitle: "La Cosecha del Aeropuerto",
+    summary: "Facilitar espacios de trabajo donde la confianza, el respeto y la tolerancia permitan que cada persona aporte desde su rol con entusiasmo y contribuya al logro de metas compartidas.",
+    duration: 45,
+    durationLabel: "45 min",
+    participants: 30,
+    participantsLabel: "Grupo completo",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["comunicacion", "confianza"],
+    symbol: "●",
+    keywords: "cosecha aeropuerto comunicación confianza respeto tolerancia urgencia",
+    html: `<p class="lead"><strong>Metodología:</strong> APEX · Aprendizaje Experiencial.</p>
+      <h2>Materiales</h2><ul class="detail-list"><li>Pelotas pequeñas.</li><li>Bolsos de cosecha.</li></ul>
+      <h2>Storytelling</h2><p>Un rey abrió las bodegas de su castillo para compartir el maíz y el trigo con la comunidad. Algunos habitantes acudieron solo por curiosidad, otros llevaron pequeños recipientes y unos pocos se prepararon con entusiasmo. La historia introduce una misión en la que preparación, compromiso y coordinación determinan cuánto puede recibir la comunidad.</p>
+      <h2>Misión e instrucciones</h2><p>Trasladar la mayor cantidad de cargas desde la bodega inicial hasta la final en un minuto. El grupo forma un círculo y cada carga debe pasar por las manos de todos antes de llegar al bolso final.</p>
+      <h2>Acuerdos</h2><ul class="detail-list"><li>Las cargas deben lanzarse, no entregarse.</li><li>No se puede pasar a quienes están a los lados, enfrente o atrás.</li><li>Una carga caída queda fuera de esa ronda.</li><li>Se realizan tres rondas y los resultados se acumulan.</li><li>Participan todos los integrantes.</li><li>Antes de cada ronda el equipo declara una meta retadora y posible.</li></ul>
+      <h2>Rondas y puntaje</h2><p><strong>Ronda 1:</strong> 10 minutos para planear y un minuto de ejecución. Cada carga suma 1 punto y cada caída resta 1.</p><p><strong>Ronda 2:</strong> 5 minutos para ajustar la estrategia y un minuto de ejecución. Cada caída resta 2.</p><p><strong>Ronda 3:</strong> 5 minutos para planear y un minuto de ejecución. Cada caída resta 4.</p><p>Superar la meta suma 3 puntos; igualarla conserva el puntaje; quedar por debajo resta 3.</p>
+      <h2>Cierre</h2><p>Reflexionar sobre cómo la comunicación consciente, el trabajo en equipo y el aporte desde cada rol fortalecen la experiencia del cliente y la confianza en cada interacción.</p>
+      <div class="table-wrap"><table><tr><th>PLANILLA DE REGISTRO</th><th>RONDA 1</th><th>RONDA 2</th><th>RONDA 3</th><th>GRAN TOTAL</th></tr><tr><td>Cargas entregadas</td><td></td><td></td><td></td><td></td></tr><tr><td>Meta</td><td></td><td></td><td></td><td></td></tr><tr><td>Cargas repartidas</td><td></td><td></td><td></td><td></td></tr><tr><td>Caídas</td><td></td><td></td><td></td><td></td></tr><tr><td>Subtotal</td><td></td><td></td><td></td><td></td></tr><tr><td>Bonificación o penalización</td><td></td><td></td><td></td><td></td></tr><tr><td>Total</td><td></td><td></td><td></td><td></td></tr></table></div>`
+  }),
+  cfcDevice({
+    id: "cosecha-tribu",
+    title: "LA COSECHA DE LA TRIBU",
+    shortTitle: "La Cosecha de la Tribu",
+    summary: "Fomentar una comunicación clara y respetuosa que permita trabajar con confianza, actuar con sentido de urgencia y analizar posibilidades para alcanzar objetivos comunes.",
+    duration: 45,
+    durationLabel: "45 min",
+    participants: 30,
+    participantsLabel: "Grupo completo",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["comunicacion", "estrategia"],
+    symbol: "◆",
+    keywords: "cosecha tribu frutas verduras urgencia comunicación equipo decisiones",
+    html: `<h2>Materiales</h2><ul class="detail-list"><li>2 bolsos.</li><li>155 frutas y verduras de varios colores y tamaños.</li><li>2 baldes o cestas.</li><li>Cronómetro y hojas de resultados.</li></ul>
+      <h2>Descripción</h2><p>Actividad vivencial para reflexionar sobre comunicación, compromiso, trabajo en equipo, sentido de urgencia y toma de decisiones bajo presión. Cada fruta o verdura representa una acción o aporte realizado para el equipo.</p>
+      <h2>Preparación del espacio</h2><ul class="detail-list"><li>Elegir un lugar amplio, despejado y seguro.</li><li>Formar un círculo con suficiente distancia entre participantes.</li><li>Ubicar una bodega de salida con todas las piezas y una bodega de llegada vacía.</li><li>Reservar un lugar para las planeaciones y mantener ambas bodegas visibles para el facilitador.</li></ul>
+      <h2>Desarrollo y storytelling</h2><p>Un reino debe distribuir las frutas y verduras de sus bodegas antes de que se pierdan. El resultado depende de la preparación, la comunicación y el compromiso de todos. La misión es trasladar la mayor cantidad posible desde la bodega A hasta la B en un minuto, trabajando como un solo equipo.</p>
+      <h2>Acuerdos</h2><ul class="detail-list"><li>Las piezas deben lanzarse y pasar por las manos de todos.</li><li>No pueden enviarse a quienes están inmediatamente a los lados, enfrente o atrás.</li><li>Las piezas que caen quedan fuera de la ronda.</li><li>Se realizan tres rondas acumulativas y todos participan.</li><li>El equipo declara una meta retadora antes de cada ejecución.</li></ul>
+      <h2>Fases</h2><p><strong>Ronda 1:</strong> 10 minutos de planeación y 1 minuto de ejecución.</p><p><strong>Ronda 2:</strong> 5 minutos para planear y ensayar; la nueva meta debe superar el mejor resultado anterior.</p><p><strong>Ronda 3:</strong> nuevo ajuste de estrategia y una última ejecución de un minuto.</p>
+      <h2>Puntaje</h2><ul class="detail-list"><li>Fruta especial —brócoli, ají o plátano—: 5 puntos.</li><li>Fruta o verdura común: 1 punto.</li><li>Caídas: -1, -2 y -4 según la ronda.</li><li>Superar la meta: +3; no alcanzarla: -3.</li></ul>
+      <h2>Cierre</h2><div class="questions"><p><span>1</span>¿Cómo influyeron la confianza y la claridad de la comunicación?</p><p><span>2</span>¿Qué cambió entre las rondas?</p><p><span>3</span>¿Cómo se conectan la urgencia y la calidad del resultado?</p></div>
+      <div class="table-wrap"><table><tr><th>PLANILLA DE REGISTRO</th><th>RONDA 1</th><th>RONDA 2</th><th>RONDA 3</th><th>GRAN TOTAL</th></tr><tr><td>Meta</td><td></td><td></td><td></td><td></td></tr><tr><td>Frutas especiales</td><td></td><td></td><td></td><td></td></tr><tr><td>Frutas comunes</td><td></td><td></td><td></td><td></td></tr><tr><td>Caídas</td><td></td><td></td><td></td><td></td></tr><tr><td>Subtotal</td><td></td><td></td><td></td><td></td></tr><tr><td>Total</td><td></td><td></td><td></td><td></td></tr></table></div>`
+  }),
+  cfcDevice({
+    id: "torre-froebel",
+    title: "LA TORRE DE FROEBEL",
+    shortTitle: "La Torre de Froebel",
+    summary: "Fortalecer la gestión del cambio y la toma de decisiones para lograr mejores resultados.",
+    duration: 45,
+    durationLabel: "Duración flexible",
+    participants: 32,
+    participantsLabel: "16–32 personas",
+    difficulty: "avanzada",
+    audience: "equipos",
+    skills: ["liderazgo", "estrategia"],
+    symbol: "▦",
+    keywords: "froebel torre cambio decisiones liderazgo comunicación coordinación cubos",
+    html: `<h2>Materiales</h2><ul class="detail-list"><li>Dispositivo de desplazamiento tipo Froebel con cuerdas.</li><li>Entre 6 y 8 cubos o tótems.</li><li>Áreas delimitadas como punto A y punto B.</li><li>Cronómetros para el facilitador y el guardián del tiempo.</li></ul>
+      <h2>Descripción</h2><p>El equipo debe trasladar y apilar tótems desde un punto inicial hasta construir una torre vertical estable. Cada cubo representa un pilar de la cultura del equipo. Las condiciones cambian durante el proceso y exigen adaptación sin perder foco ni cohesión.</p>
+      <h2>Preparación y seguridad</h2><ul class="detail-list"><li>Usar un espacio amplio, plano y seguro.</li><li>Ubicar los tótems en el punto A y reservar el punto B para la torre.</li><li>Garantizar visión completa del facilitador y tensión segura de las cuerdas.</li></ul>
+      <h2>Acuerdos</h2><ul class="detail-list"><li>Los tótems solo se mueven con el dispositivo.</li><li>No se amarran cuerdas a manos o brazos.</li><li>Cada persona sostiene al menos una cuerda completamente extendida.</li><li>No se manipulan los tótems con las manos salvo en la zona segura.</li><li>Si un tótem cae antes de la zona segura, el ejercicio reinicia.</li><li>El facilitador puede modificar las reglas.</li></ul>
+      <h2>Guardián del tiempo</h2><p>El equipo elige a una persona que anuncia el inicio, la mitad y el cierre del tiempo. No toca el dispositivo ni toma decisiones técnicas; puede hablar únicamente para informar el tiempo.</p>
+      <h2>Fases</h2><h3>Nivel 1 · Planeación estratégica</h3><p>Diez minutos para asignar roles, comprender el dispositivo, acordar liderazgo y anticipar riesgos, sin mover los cubos.</p><h3>Nivel 2 · Ejecución con visión y voz</h3><p>Todos pueden ver y hablar. El equipo inicia el traslado, ajusta tensión y movimientos y busca apilar al menos cinco cubos.</p><h3>Nivel 3 · Restricción dinámica de comunicación</h3><p>Al inicio solo dos líderes pueden hablar. A mitad de la fase, ellos guardan silencio y el resto del equipo asume la coordinación.</p><h3>Nivel 4 · Pérdida de visión</h3><p>Entre tres y cinco personas pierden la visión y solo los dos líderes pueden hablar. El equipo debe ajustar roles y sostener la estabilidad emocional y técnica.</p>
+      <h2>Debrief</h2><div class="questions"><p><span>1</span>¿Qué pasó cuando cambiaron las reglas?</p><p><span>2</span>¿Cómo reaccionaron frente al error?</p><p><span>3</span>¿Qué liderazgo apareció de forma natural?</p><p><span>4</span>¿Qué pilar fue más difícil de sostener?</p><p><span>5</span>¿Qué enseña la torre sobre la forma real de trabajar?</p></div>`
+  }),
+  cfcDevice({
+    id: "el-partido-panuelos",
+    title: "EL PARTIDO – LOS PAÑUELOS",
+    shortTitle: "El Partido · Los Pañuelos",
+    summary: "Reforzar la estrategia, la toma de decisiones en equipo y la participación equitativa.",
+    duration: 30,
+    durationLabel: "Duración flexible",
+    participants: 30,
+    participantsLabel: "Dos equipos",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["estrategia", "liderazgo"],
+    symbol: "⚑",
+    keywords: "partido pañuelos fútbol estrategia participación director técnico competencia",
+    html: `<h2>Introducción</h2><p>El partido pone a prueba estrategia, rapidez de reacción, participación y apoyo al equipo. Cada grupo designa a un director técnico que organiza los cambios. Todas las personas deben participar y nadie puede repetir en rondas consecutivas, excepto cuando juega el equipo completo.</p>
+      <h2>Instrucciones</h2><ul class="detail-list"><li>Cada participante lleva un pañuelo en la espalda.</li><li>En cada ronda un equipo persigue al otro para quitarle el pañuelo sin salir de la cancha.</li><li>Quien pierde el pañuelo queda fuera de esa ronda.</li><li>El equipo que conserva su pañuelo obtiene el punto.</li><li>Gana el primero que alcanza 11 puntos.</li></ul>
+      <h2>Rondas</h2><ol class="detail-list"><li>Dos hombres por equipo.</li><li>Dos mujeres por equipo.</li><li>Un hombre y una mujer.</li><li>Dos hombres.</li><li>Dos mujeres.</li><li>Todo el equipo.</li><li>Una mujer y dos hombres.</li><li>Un hombre y dos mujeres.</li><li>Tres hombres y tres mujeres.</li><li>Cinco integrantes.</li><li>Todo el equipo.</li></ol><p>Las rondas pueden repetirse en el mismo orden según la necesidad.</p>
+      <h2>Debrief</h2><div class="questions"><p><span>1</span>¿Cómo influyó el director técnico en las decisiones?</p><p><span>2</span>¿Qué peso tuvo la estrategia frente a la velocidad o la fuerza?</p><p><span>3</span>¿Cómo se sintieron al entrar a la cancha?</p><p><span>4</span>¿Qué emociones surgieron al perseguir o defender?</p><p><span>5</span>¿Qué significa “jugar tu partido” en el trabajo?</p></div>`
+  }),
+  cfcDevice({
+    id: "moldeando-lo-que-siento",
+    title: "MOLDEANDO LO QUE SIENTO",
+    shortTitle: "Moldeando lo que siento",
+    summary: "Reconocer que todas las emociones cumplen una función y comprender cómo impactan en nuestras experiencias y percepciones.",
+    duration: 40,
+    durationLabel: "40 min",
+    participants: 30,
+    participantsLabel: "Grupo completo",
+    difficulty: "inicial",
+    audience: "general",
+    skills: ["reflexion", "conexion"],
+    symbol: "◉",
+    keywords: "emociones plastilina play-doh experiencia cliente reflexión bienestar",
+    html: `<p class="lead"><strong>Metodología:</strong> Piensa con las manos.</p>
+      <h2>Materiales</h2><ul class="detail-list"><li>Plastilina común.</li><li>Play-Doh.</li><li>Hojas blancas A4.</li><li>Mesas, manteles y toallitas húmedas.</li></ul>
+      <h2>Preparación</h2><p>Organizar las sillas en círculo y disponer tres mesas de trabajo. Cada persona desarrolla su creación individualmente.</p>
+      <h2>Fase 1 · Moldea una emoción</h2><p>Explicar que las emociones no son buenas o malas: pueden ser agradables o desagradables y todas cumplen una función. Cada participante modela con una pequeña porción de Play-Doh una emoción primaria que siente en ese momento y luego comparte qué representa. El facilitador registra qué emociones predominan.</p>
+      <h2>Fase 2 · Experiencia positiva</h2><p>Con la porción grande de Play-Doh, cada persona plasma en la mitad superior de una hoja una experiencia positiva personal o laboral. Después comparte qué representa, por qué la eligió y qué emoción le genera.</p>
+      <h2>Fase 3 · Experiencia negativa</h2><p>Con plastilina común, cada persona representa en la otra mitad de la hoja una experiencia negativa. Se observan las diferencias de textura y facilidad de trabajo, y se conectan con las sensaciones que despierta cada recuerdo.</p>
+      <h2>Cierre</h2><div class="questions"><p><span>1</span>¿Cómo se sintieron al trabajar con los dos materiales?</p><p><span>2</span>¿Qué emociones surgieron con cada experiencia?</p><p><span>3</span>¿Cómo influye el estado de ánimo en la forma de atender a otros?</p><p><span>4</span>¿Qué pueden hacer para no trasladar una emoción desagradable al cliente?</p></div><p>Un equipo emocionalmente sano no solo se siente mejor, también atiende mejor.</p>`
+  }),
+  cfcDevice({
+    id: "puente-da-vinci",
+    title: "PUENTE DE DA VINCI",
+    shortTitle: "Puente de Da Vinci",
+    summary: "Experimentar la importancia del trabajo en equipo, la planificación, la comunicación y la mejora continua.",
+    duration: 25,
+    durationLabel: "25 min",
+    participants: 10,
+    participantsLabel: "5–10 personas",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["comunicacion", "estrategia"],
+    symbol: "⌁",
+    keywords: "puente da vinci innovación planificación construcción mejora equipo",
+    html: `<h2>Contexto</h2><p>Diseñado por Leonardo da Vinci alrededor del año 1500, este puente autoportante se sostiene sin clavos, tornillos ni sujetadores. Cada pieza depende de las demás y distribuye las fuerzas de manera equilibrada.</p>
+      <h2>Materiales</h2><ul class="detail-list"><li>10 palos de madera largos.</li><li>5 palos de madera cortos.</li><li>Manual o plano de construcción.</li></ul>
+      <h2>Desafío</h2><p>Construir con los 15 elementos un puente de al menos 60 cm de altura, capaz de soportar el peso definido y fácil de desmontar y transportar. No se permite utilizar teléfonos.</p>
+      <h2>Fase 1 · Construcción sin guía</h2><p>El equipo recibe únicamente 13 elementos e intenta construir durante 10 minutos usando intuición, creatividad y comunicación. Luego analiza qué información o recursos hicieron falta.</p>
+      <h2>Fase 2 · Construcción con instrucciones</h2><p>El equipo dispone de otros 10 minutos. Transcurridos dos minutos recibe el plano para reorganizarse y completar el desafío.</p>
+      <h2>Fase 3 · Reflexión</h2><p>Se conectan los puentes de los equipos y se reflexiona sobre bases sólidas, cohesión, adaptación y objetivos comunes.</p>
+      <h2>Habilidades observables</h2><ul class="detail-list"><li>Comunicación efectiva.</li><li>Liderazgo.</li><li>Orientación a resultados.</li><li>Pensamiento crítico y analítico.</li><li>Trabajo en equipo.</li><li>Adaptabilidad.</li></ul>
+      <h2>Preguntas de cierre</h2><div class="questions"><p><span>1</span>¿Qué ocurrió durante la actividad?</p><p><span>2</span>¿Qué dificultades encontraron y cómo las resolvieron?</p><p><span>3</span>¿Cómo influyó la comunicación?</p><p><span>4</span>¿En qué se parece la experiencia al entorno laboral?</p><p><span>5</span>¿Qué harían diferente?</p></div>`
+  }),
+  cfcDevice({
+    id: "torre-hanoi",
+    title: "TORRE DE HANOI",
+    shortTitle: "Torre de Hanoi",
+    summary: "Desarrollar lógica, control, medición, coordinación y mejora continua mediante un desafío progresivo de traslado de fichas.",
+    duration: 30,
+    durationLabel: "Duración flexible",
+    participants: 3,
+    participantsLabel: "3 personas por equipo",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["estrategia", "comunicacion"],
+    symbol: "≋",
+    keywords: "torre hanoi fichas lógica movimientos medición coordinación mejora",
+    html: `<h2>Objetivo y reglas</h2><p>Trasladar todas las fichas del punto inicial al final. Solo puede moverse una ficha a la vez y nunca se coloca una ficha grande sobre una pequeña.</p>
+      <h2>Nivel 1 · Conocer</h2><p>El facilitador explica las reglas y realiza una demostración. Después, cada integrante completa individualmente la torre de tres fichas una vez, para comprender la lógica y familiarizarse con el dispositivo.</p>
+      <h2>Nivel 2 · Comprender</h2><p>El equipo repite el reto con una hoja de registro y cronómetro. Cada persona realiza un movimiento por turno y el grupo cuenta todos los movimientos. Se realizan tres ejecuciones para observar mejoras en tiempo y eficiencia.</p>
+      <h2>Nivel 3 · Aprender</h2><p>Se agrega una cuarta ficha. El equipo registra movimientos y tiempo, mantiene turnos de un movimiento por persona y ejecuta sin hablar. Se realizan tres intentos para evaluar adaptación, coordinación no verbal y mejora continua.</p>
+      <h2>Referencia de movimientos</h2><ul class="detail-list"><li>Para 3 fichas: 26 movimientos señalados en la ficha fuente.</li><li>Para 4 fichas: 80 movimientos señalados en la ficha fuente.</li></ul>`
+  }),
+  cfcDevice({
+    id: "alineacion-medusas",
+    title: "LA ALINEACIÓN – MEDUSAS",
+    shortTitle: "La Alineación · Medusas",
+    summary: "Comprender que los resultados se alcanzan cuando cada miembro aporta desde su rol y todos se alinean en una misma estrategia.",
+    duration: 30,
+    durationLabel: "Duración flexible",
+    participants: 30,
+    participantsLabel: "Grupo completo",
+    difficulty: "intermedia",
+    audience: "equipos",
+    skills: ["comunicacion", "confianza"],
+    symbol: "✣",
+    keywords: "alineación medusas fútbol cuerdas pelota coordinación roles equipo",
+    html: `<h2>Introducción</h2><p>Como en una alineación de fútbol, cada persona cumple un rol y debe coordinarse con el resto. Cada participante toma una cuerda del dispositivo y el grupo guía una pelota desde el punto A hasta el punto B sin dejarla caer, hasta conseguir el gol.</p>
+      <h2>Claves del desafío</h2><ul class="detail-list"><li>Comunicación constante.</li><li>Movimientos sincronizados.</li><li>Apoyo mutuo.</li><li>Juego colectivo.</li></ul>
+      <h2>Debrief</h2><div class="questions"><p><span>1</span>¿Qué tan fácil o difícil fue alinear los movimientos?</p><p><span>2</span>¿Cómo ayudó la comunicación a que la pelota avanzara?</p><p><span>3</span>¿Qué ocurrió cuando alguien perdió el ritmo del grupo?</p><p><span>4</span>¿Cómo se sintió cumplir un rol dentro de la alineación?</p><p><span>5</span>¿Qué similitudes existen con el trabajo diario?</p><p><span>6</span>¿Qué comportamientos de esta experiencia quisieran repetir en el trabajo?</p></div>
+      <h2>Cierre</h2><p>Una alineación no depende de una sola persona, sino de cómo todos se organizan y se complementan. La clave no está en correr más rápido, sino en pensar, moverse y actuar como un solo equipo.</p>`
+  })
+);

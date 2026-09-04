@@ -792,6 +792,7 @@ function closeSuggestions() {
 function openDetail(id) {
   const item = activities.find(activity => activity.id === id);
   if (!item) return;
+  sessionStorage.setItem("cfc-ficha-actual", JSON.stringify(item));
   const included = new Set(String(item.structuredFields?.["SECCIONES INCLUIDAS"] || "summary,duration,participants,mode").split(",").filter(Boolean));
   const badges = [categoryName(item.category), included.has("duration") ? item.durationLabel : "", included.has("participants") ? item.participantsLabel : "", included.has("mode") ? item.mode : ""].filter(Boolean);
   dialog.querySelector(".detail-badges").innerHTML = badges.map(value => `<span>${safeText(value)}</span>`).join("");
@@ -811,7 +812,6 @@ function openDetail(id) {
   downloadButton.innerHTML = "Descargar ficha <span>↓</span>";
   downloadButton.removeAttribute("download");
   if (item.uploaded) {
-    sessionStorage.setItem("cfc-ficha-actual", JSON.stringify(item));
     if (item.remoteFileUrl) {
       downloadButton.href = item.remoteFileUrl;
       downloadButton.download = item.fileName || "ficha-cargada";
@@ -827,6 +827,9 @@ function openDetail(id) {
       downloadButton.href = "ficha.html";
       downloadButton.target = "_self";
     }
+  } else if (item.nativeDynamic) {
+    downloadButton.href = "ficha.html";
+    downloadButton.target = "_self";
   } else {
     downloadButton.href = `descargas/${item.id}.html`;
     downloadButton.target = "_self";
