@@ -884,10 +884,12 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
 .hero-welcome-robot { position: absolute; z-index: 72; top: 92px; right: max(3vw,24px); width: 300px; height: 255px; display: flex; align-items: flex-end; justify-content: flex-end; opacity: 0; visibility: hidden; pointer-events: none; }
 .hero-welcome-robot.greet { animation: uploadAssistantExit 3s ease forwards; }
 .upload-robot-figure { position: relative; width: 190px; filter: drop-shadow(0 17px 20px rgba(15,17,21,.25)); }
-.upload-robot-figure img { position: absolute; inset: 0; width: 100%; display: block; }
-.upload-robot-figure .robot-body { position: relative; clip-path: polygon(0 0,100% 0,100% 33%,72% 33%,72% 67%,100% 67%,100% 100%,0 100%); }
-.robot-right-arm { clip-path: polygon(70% 31%,100% 31%,100% 70%,70% 70%); transform-origin: 74% 51%; }
+.upload-robot-figure img { position: absolute; inset: 0; z-index: 1; width: 100%; display: block; }
+.upload-robot-figure .robot-body { position: relative; }
+.robot-right-arm { z-index: 2 !important; clip-path: polygon(70% 34%,94% 34%,94% 59%,70% 59%); transform-origin: 73% 52%; }
+.upload-robot-figure::after { content: ""; position: absolute; z-index: 3; top: 27.2%; left: 43.4%; width: 10.5%; height: 7%; border-radius: 50%; background: #343537; box-shadow: 24.5px 0 0 #343537; opacity: 0; transform: rotate(-7deg) scaleY(.18); pointer-events: none; }
 .hero-welcome-robot.greet .robot-right-arm { animation: rightHandWave .68s ease-in-out 3; }
+.hero-welcome-robot.greet .upload-robot-figure::after { animation: robotEyeBlink 3s linear both; }
 .upload-robot-bubble { position: absolute; z-index: 4; right: 160px; top: 30px; min-width: 130px; padding: 14px 19px; border: 1px solid rgba(255,255,255,.95); border-radius: 19px 19px 5px 19px; color: white; background: linear-gradient(145deg,#cc3442,#7d0d17); box-shadow: inset 0 1px 0 rgba(255,255,255,.4),0 13px 25px rgba(79,6,14,.28); font: 800 12px "Manrope",sans-serif; letter-spacing: .04em; text-align: center; }
 .hero-welcome-robot.greet .upload-robot-bubble { animation: uploadBubblePop .45s ease both; }
 .upload-robot-bubble > span { position: absolute; right: -8px; bottom: 1px; width: 18px; height: 18px; background: #7d0d17; clip-path: polygon(0 0,100% 100%,0 73%); }
@@ -1239,7 +1241,8 @@ footer .footer-brand { width: min(330px,36vw); border-radius: 14px; filter: drop
 @keyframes orbitFloatB { 0%,100% { transform: translate(0,0) rotate(0); } 26% { transform: translate(-38px,24px) rotate(10deg); } 54% { transform: translate(-68px,78px) rotate(19deg); } 78% { transform: translate(-15px,108px) rotate(8deg); } }
 @keyframes cubeDrift { 0%,100% { transform: translate(0,0) rotate(8deg); } 50% { transform: translate(18px,-22px) rotate(24deg); } }
 @keyframes clusterFloat { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-13px) rotate(1deg); } }
-@keyframes rightHandWave { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-18deg) translate(5px,-3px); } }
+@keyframes rightHandWave { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-13deg) translate(3px,-2px); } }
+@keyframes robotEyeBlink { 0%,19%,23%,51%,55%,100% { opacity: 0; } 20%,22%,52%,54% { opacity: 1; } }
 @keyframes uploadBubblePop { 0% { opacity: 0; transform: translate(14px,10px) scale(.72); } 100% { opacity: 1; transform: none; } }
 @keyframes uploadAssistantExit { 0%,78% { opacity: 1; visibility: visible; transform: translateY(0); } 100% { opacity: 0; visibility: hidden; transform: translateY(-12px); } }
 
