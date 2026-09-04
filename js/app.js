@@ -78,6 +78,9 @@ const uploadForm = document.querySelector("#uploadForm");
 const uploadName = document.querySelector("#activityName");
 const uploadMessage = document.querySelector(".upload-message");
 const selectedSourceFile = document.querySelector(".selected-source-file");
+const importSourceFile = document.querySelector("[name='importSourceFile']");
+const importMessage = document.querySelector(".import-message");
+const importSubmit = document.querySelector(".import-submit");
 const downloadBackupButton = document.querySelector(".download-backup");
 const restoreBackupButton = document.querySelector(".restore-backup");
 const restoreBackupFile = document.querySelector(".restore-backup-file");
@@ -94,6 +97,7 @@ const renameActivityName = document.querySelector("#renameActivityName");
 const renameMessage = document.querySelector(".rename-message");
 let pendingDeleteId = "";
 let pendingRenameId = "";
+let editingActivityId = "";
 let currentOriginalUrl = "";
 
 async function remoteRequest(action, options = {}) {
@@ -160,7 +164,8 @@ async function getUploadedActivities() {
 async function loadUploadedActivities() {
   try {
     const uploaded = await getUploadedActivities();
-    activities = [...activities, ...uploaded];
+    const uploadedIds = new Set(uploaded.map(item => item.id));
+    activities = [...activities.filter(item => !uploadedIds.has(item.id)), ...uploaded];
   } catch (error) {
     console.warn("No fue posible recuperar las fichas locales.", error);
   }
@@ -233,7 +238,7 @@ function renderUploadedManager() {
         <small>${categoryName(item.category)} · ${item.uploaded ? safeText(item.fileName) : "Ficha original"}</small>
       </div>
       <div class="uploaded-item-actions">
-        <button class="request-rename" type="button" data-rename-id="${item.id}">Editar nombre</button>
+        <button class="request-edit" type="button" data-edit-id="${item.id}">Editar ficha</button>
         <button class="request-delete" type="button" data-delete-id="${item.id}">Eliminar</button>
       </div>
     </article>`).join("");
@@ -294,6 +299,8 @@ const navBrandSelection = document.querySelector(".nav-brand-selection");
 const brandPrograms = document.querySelector("#brandPrograms");
 const programForm = document.querySelector("#programForm");
 const programName = document.querySelector("#programName");
+const programMonth = document.querySelector("#programMonth");
+const programYear = document.querySelector("#programYear");
 const programDeviceOptions = document.querySelector(".program-device-options");
 const programList = document.querySelector(".program-list");
 const programFormMessage = document.querySelector(".program-form-message");
@@ -380,6 +387,21 @@ function resetProgramForm() {
   programFormMessage.textContent = "";
   cancelProgramEdit.hidden = true;
   saveProgramButton.innerHTML = "Añadir programa <span>＋</span>";
+  programMonth.value = String(new Date().getMonth() + 1);
+  programYear.value = String(new Date().getFullYear());
+}
+
+const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+function programDateParts(record) {
+  if (record.year && record.month) return { year: Number(record.year), month: Number(record.month) };
+  const fallback = new Date(record.createdAt || Date.now());
+  return { year: fallback.getFullYear(), month: fallback.getMonth() + 1 };
+}
+
+function programDateLabel(record) {
+  const { year, month } = programDateParts(record);
+  return `${monthNames[month - 1] || "Mes por definir"} ${year}`;
 }
 
 function renderBrandPrograms() {
@@ -401,14 +423,20 @@ function renderBrandPrograms() {
   };
   programDeviceOptions.innerHTML = experienceGroup("activador", "Activadores", "⚡") + experienceGroup("dispositivo", "Dispositivos", "◆");
 
-  const records = brandProgramRecords.filter(record => record.brandId === selectedBrand && (selectedBrand !== "car" || record.department === activeDepartment));
+  const records = brandProgramRecords
+    .filter(record => record.brandId === selectedBrand && (selectedBrand !== "car" || record.department === activeDepartment))
+    .sort((first, second) => {
+      const a = programDateParts(first);
+      const b = programDateParts(second);
+      return (a.year * 12 + a.month) - (b.year * 12 + b.month) || (first.createdAt || 0) - (second.createdAt || 0);
+    });
   document.querySelector(".program-count").textContent = `${records.length} ${records.length === 1 ? "programa" : "programas"}`;
   programList.innerHTML = records.length ? records.map((record, index) => {
     const linkedExperiences = (record.activityIds || record.deviceIds || []).map(id => activities.find(activity => activity.id === id)).filter(Boolean);
     const deviceMarkup = linkedExperiences.length ? linkedExperiences.map(activity => `<button type="button" data-open="${escapeHTML(activity.id)}"><span>${escapeHTML(activity.symbol)}</span>${escapeHTML(activity.shortTitle)} <small>${categoryName(activity.category)}</small></button>`).join("") : `<p>Sin activadores o dispositivos vinculados todavía.</p>`;
     return `<article class="program-card">
       <div class="program-index">${String(index + 1).padStart(2, "0")}</div>
-      <div class="program-card-copy"><small>${escapeHTML(contextLabel)}</small><h4>${escapeHTML(record.name)}</h4><div class="program-devices">${deviceMarkup}</div></div>
+      <div class="program-card-copy"><small>${escapeHTML(contextLabel)}</small><h4>${escapeHTML(record.name)}</h4><span class="program-date">◷ ${escapeHTML(programDateLabel(record))}</span><div class="program-devices">${deviceMarkup}</div></div>
       <div class="program-card-actions"><button type="button" data-program-edit="${record.id}">Editar</button><button type="button" data-program-delete="${record.id}">Eliminar</button></div>
     </article>`;
   }).join("") : `<div class="program-empty"><span>＋</span><strong>Aún no hay programas para ${escapeHTML(contextLabel)}</strong><p>Crea el primero y relaciona los activadores y dispositivos que utilizaron.</p></div>`;
@@ -505,9 +533,14 @@ programForm.addEventListener("submit", async event => {
   event.preventDefault();
   if (!selectedBrand) return;
   const name = programName.value.trim();
+  const month = Number(programMonth.value);
+  const year = Number(programYear.value);
   const activityIds = [...programForm.querySelectorAll('input[name="programActivity"]:checked')].map(input => input.value);
   const department = selectedBrand === "car" ? [...selectedDepartments][0] || "" : "";
-  if (!name) return;
+  if (!name || month < 1 || month > 12 || year < 2000 || year > 2100) {
+    programFormMessage.textContent = "Completa el nombre, el mes y el año del programa.";
+    return;
+  }
   if (selectedBrand === "car" && !department) return;
   const action = editingProgramId ? `guardar los cambios de “${name}”` : `añadir el programa “${name}”`;
   if (!window.confirm(`¿Confirmas que deseas ${action}?`)) {
@@ -516,9 +549,9 @@ programForm.addEventListener("submit", async event => {
   }
   if (editingProgramId) {
     const record = brandProgramRecords.find(item => item.id === editingProgramId);
-    if (record) Object.assign(record, { name, activityIds, department, updatedAt: Date.now() });
+    if (record) Object.assign(record, { name, month, year, activityIds, department, updatedAt: Date.now() });
   } else {
-    brandProgramRecords.push({ id: `program-${Date.now()}-${Math.random().toString(16).slice(2)}`, brandId: selectedBrand, department, name, activityIds, createdAt: Date.now() });
+    brandProgramRecords.push({ id: `program-${Date.now()}-${Math.random().toString(16).slice(2)}`, brandId: selectedBrand, department, name, month, year, activityIds, createdAt: Date.now() });
   }
   localStorage.setItem(brandProgramsStorageKey, JSON.stringify(brandProgramRecords));
   await syncRemoteState();
@@ -533,10 +566,15 @@ programList.addEventListener("click", event => {
     if (!record) return;
     editingProgramId = record.id;
     programName.value = record.name;
+    const recordDate = programDateParts(record);
+    programMonth.value = String(recordDate.month);
+    programYear.value = String(recordDate.year);
     cancelProgramEdit.hidden = false;
     saveProgramButton.innerHTML = "Guardar cambios <span>✓</span>";
     renderBrandPrograms();
     programName.value = record.name;
+    programMonth.value = String(recordDate.month);
+    programYear.value = String(recordDate.year);
     programName.focus();
     return;
   }
@@ -612,7 +650,7 @@ function cardTemplate(item) {
       <div class="card-footer">
         <small>${item.skills.map(skill => skill.charAt(0).toUpperCase() + skill.slice(1)).join(" · ")}</small>
         <span class="card-actions">
-          <button class="edit-card-name" type="button" data-rename-id="${item.id}" aria-label="Editar nombre de ${item.shortTitle}" title="Editar nombre">✎</button>
+          <button class="edit-card-name" type="button" data-edit-id="${item.id}" aria-label="Editar ficha ${item.shortTitle}" title="Editar ficha">✎</button>
           <button class="view-detail" type="button" data-open="${item.id}" aria-label="Ver más información">↗</button>
         </span>
       </div>
@@ -765,7 +803,7 @@ function openDetail(id) {
   detailSummary.textContent = included.has("summary") ? item.summary : "";
   detailSummary.hidden = !included.has("summary");
   dialog.querySelector(".detail-content").innerHTML = item.html;
-  dialog.querySelector(".edit-detail-name").dataset.renameId = item.id;
+  dialog.querySelector(".edit-detail-name").dataset.editId = item.id;
   const downloadButton = dialog.querySelector(".download-button");
   const originalButton = dialog.querySelector(".original-file-button");
   if (currentUploadedUrl) URL.revokeObjectURL(currentUploadedUrl);
@@ -834,10 +872,10 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("click", event => {
-  const renameButton = event.target.closest("[data-rename-id]");
-  if (renameButton) {
+  const editButton = event.target.closest("[data-edit-id]");
+  if (editButton) {
     event.stopPropagation();
-    openRenameDialog(renameButton.dataset.renameId);
+    openEditActivity(editButton.dataset.editId);
     return;
   }
   const favoriteButton = event.target.closest("[data-favorite]");
@@ -913,13 +951,82 @@ menuToggle.addEventListener("click", () => {
 });
 
 function resetUploadForm() {
+  editingActivityId = "";
   uploadForm.reset();
   uploadMessage.textContent = "";
   uploadMessage.classList.remove("success");
+  importMessage.textContent = "";
+  importMessage.classList.remove("success");
+  document.querySelector("#uploadTitle").textContent = "Crear una nueva ficha";
+  uploadForm.querySelector(".upload-submit").innerHTML = "Crear ficha <span>→</span>";
+  uploadForm.querySelector(".upload-cancel").textContent = "Cancelar";
+  syncSelectedSourceFile();
   backupMessage.textContent = "";
   syncCreateType();
   syncGridBuilder();
   if (typeof resetLevelsBuilder === "function") resetLevelsBuilder();
+}
+
+function setCreateValue(name, value) {
+  const control = uploadForm.elements.namedItem(name);
+  if (control && value !== undefined && value !== null) control.value = value;
+}
+
+function openEditActivity(id) {
+  const item = activities.find(activity => activity.id === id);
+  if (!item) return;
+  if (dialog.open) dialog.close();
+  resetUploadForm();
+  editingActivityId = id;
+  const categoryInput = uploadForm.querySelector(`input[name='uploadCategory'][value='${item.category}']`);
+  if (categoryInput) categoryInput.checked = true;
+  syncCreateType();
+  document.querySelector("#uploadTitle").textContent = "Editar ficha";
+  uploadForm.querySelector(".upload-submit").innerHTML = "Guardar cambios <span>✓</span>";
+  uploadForm.querySelector(".upload-cancel").textContent = "Cancelar edición";
+  const fields = item.structuredFields || {};
+  const fieldMap = {
+    activityName: item.shortTitle,
+    summary: fields["RESUMEN PARA TARJETA"] || item.summary,
+    objective: fields["OBJETIVO GENERAL"] || "",
+    duration: fields["DURACIÓN"] || item.durationLabel,
+    participants: fields["PARTICIPANTES"] || item.participantsLabel,
+    mode: fields["MODALIDAD"] || item.mode,
+    skills: fields["COMPETENCIAS"] || (item.skills || []).join(", "),
+    audience: fields["PÚBLICO OBJETIVO"] || item.publicLabel || item.audience,
+    materials: fields["MATERIALES"], preparation: fields["PREPARACIÓN DEL ESPACIO"], initialInstruction: fields["INSTRUCCIÓN INICIAL"],
+    activatorMoment: fields["MOMENTO RECOMENDADO"], activatorEnergy: fields["NIVEL DE ENERGÍA"], activatorDevelopment: fields["DESARROLLO DEL ACTIVADOR"], activatorQuestions: fields["PREGUNTAS DE CIERRE"], activatorLearning: fields["APRENDIZAJE ESPERADO"], activatorNotes: fields["VARIACIONES"] || fields["OBSERVACIONES PARA FACILITACIÓN"],
+    deviceDifficulty: fields["NIVEL DE DIFICULTAD"] || item.difficulty, deviceMethodology: fields["METODOLOGÍA"], deviceStorytelling: fields["STORYTELLING"], deviceRules: fields["ACUERDOS O REGLAS"], deviceDevelopment: fields["DESARROLLO DEL DISPOSITIVO"], deviceFacilitator: fields["ROL DE LA PERSONA FACILITADORA"], deviceSafety: fields["SEGURIDAD Y CUIDADOS"], deviceCompletion: fields["CRITERIO DE FINALIZACIÓN"], deviceQuestions: fields["PREGUNTAS DE DEBRIEFING"], deviceLearning: fields["APRENDIZAJE ESPERADO"], deviceResults: fields["RESULTADOS O REGISTRO"], deviceNotes: fields["VARIACIONES"] || fields["OBSERVACIONES PARA FACILITACIÓN"],
+    gridTitle: fields["TÍTULO DE CUADRÍCULA"], gridXAxis: fields["EJE X"], gridYAxis: fields["EJE Y"], gridColumns: fields["COLUMNAS DE CUADRÍCULA"], gridRows: fields["FILAS DE CUADRÍCULA"], gridColumnLabels: fields["ENCABEZADOS DE COLUMNAS"], gridRowLabels: fields["ETIQUETAS DE FILAS"], gridFooter: fields["TEXTO INFERIOR DE CUADRÍCULA"]
+  };
+  Object.entries(fieldMap).forEach(([name, value]) => setCreateValue(name, value));
+  if (fields["SECCIONES INCLUIDAS"]) {
+    const included = new Set(fields["SECCIONES INCLUIDAS"].split(","));
+    uploadForm.querySelectorAll("input[name='includeSections']:not(:disabled)").forEach(input => { input.checked = included.has(input.value); });
+  }
+  const gridEnabled = fields["CUADRÍCULA ACTIVA"] === "sí";
+  if (gridToggle) gridToggle.checked = gridEnabled;
+  syncGridBuilder();
+  if (fields["NIVELES ACTIVOS"] === "sí" && levelsToggle) {
+    levelsToggle.checked = true;
+    syncLevelsBuilder();
+    try {
+      const levels = JSON.parse(fields["NIVELES"] || "[]");
+      levelsList.innerHTML = "";
+      levels.forEach(() => addLevel());
+      levels.forEach((level, index) => {
+        const card = levelsList.children[index];
+        card.querySelector("[data-level-name]").value = level.name || "";
+        card.querySelector("[data-level-duration]").value = level.duration || "";
+        card.querySelector("[data-level-description]").value = level.description || "";
+      });
+    } catch (error) { /* conserva el editor vacío */ }
+  }
+  syncInclusionFields();
+  renderUploadedManager();
+  uploadDialog.showModal();
+  document.body.style.overflow = "hidden";
+  uploadDialog.querySelector(".upload-shell").scrollTop = 0;
 }
 
 function closeUploadDialog() {
@@ -979,10 +1086,10 @@ restoreBackupFile.addEventListener("change", async () => {
 });
 
 uploadedList.addEventListener("click", event => {
-  const renameButton = event.target.closest("[data-rename-id]");
-  if (renameButton) {
+  const editButton = event.target.closest("[data-edit-id]");
+  if (editButton) {
     event.stopPropagation();
-    openRenameDialog(renameButton.dataset.renameId);
+    openEditActivity(editButton.dataset.editId);
     return;
   }
   const button = event.target.closest("[data-delete-id]");
@@ -1144,23 +1251,20 @@ function syncCreateType() {
   const typeNumber = uploadForm.querySelector(`[data-create-type='${category}'] .upload-section-heading > span`);
   if (typeNumber) typeNumber.textContent = category === "activador" ? "04" : "06";
   syncInclusionFields();
-  syncSelectedSourceFile();
-}
-
-function activeSourceFile() {
-  const category = new FormData(uploadForm).get("uploadCategory") || "activador";
-  return uploadForm.elements.namedItem(category === "activador" ? "activatorSourceFile" : "deviceSourceFile")?.files?.[0] || null;
 }
 
 function syncSelectedSourceFile() {
   if (!selectedSourceFile) return;
-  const file = activeSourceFile();
+  const file = importSourceFile?.files?.[0] || null;
   selectedSourceFile.textContent = file ? `Archivo seleccionado: ${file.name}` : "Ningún archivo seleccionado.";
   selectedSourceFile.classList.toggle("has-file", Boolean(file));
+  if (file && !uploadForm.elements.namedItem("importName").value.trim()) {
+    uploadForm.elements.namedItem("importName").value = file.name.replace(/\.(?:docx|pdf)$/i, "").replace(/[_-]+/g, " ");
+  }
 }
 
 uploadForm.querySelectorAll("input[name='uploadCategory']").forEach(radio => radio.addEventListener("change", syncCreateType));
-uploadForm.querySelectorAll("input[type='file'][name$='SourceFile']").forEach(input => input.addEventListener("change", syncSelectedSourceFile));
+importSourceFile?.addEventListener("change", syncSelectedSourceFile);
 uploadForm.querySelectorAll("input[name='includeSections']").forEach(checkbox => checkbox.addEventListener("change", syncInclusionFields));
 syncCreateType();
 
@@ -1346,8 +1450,14 @@ uploadForm.addEventListener("submit", async event => {
     uploadMessage.textContent = "Completa los campos necesarios para construir la ficha.";
     return;
   }
+  const existing = editingActivityId ? activities.find(activity => activity.id === editingActivityId) : null;
+  if (existing && !window.confirm(`¿Confirmas que deseas guardar los cambios realizados en “${existing.shortTitle}”?`)) {
+    uploadMessage.textContent = "La edición fue cancelada. La ficha se mantiene sin cambios.";
+    return;
+  }
   const item = {
-    id: `ficha-${Date.now()}`,
+    ...(existing || {}),
+    id: existing?.id || `ficha-${Date.now()}`,
     title: name,
     shortTitle: name,
     summary: uploadForm.elements.namedItem("summary").value.trim(),
@@ -1368,15 +1478,9 @@ uploadForm.addEventListener("submit", async event => {
     uploaded: true,
     createdInPortal: true
   };
-  const sourceFile = activeSourceFile();
-  if (sourceFile) {
-    item.fileName = sourceFile.name;
-    item.fileType = sourceFile.type;
-    item.fileBlob = sourceFile;
-  }
   const submitButton = uploadForm.querySelector(".upload-submit");
   submitButton.disabled = true;
-  uploadMessage.textContent = "Creando la tarjeta y la ficha visual…";
+  uploadMessage.textContent = existing ? "Guardando todos los cambios…" : "Creando la tarjeta y la ficha visual…";
   try {
     const fields = createFieldsFromForm(category);
     let savedLocally = !remoteMode;
@@ -1394,12 +1498,21 @@ uploadForm.addEventListener("submit", async event => {
         await saveUploadedActivity(item);
       }
     } else {
-      Object.assign(item, createLocalActivity(item, fields));
+      const generated = createLocalActivity(item, fields);
+      if (existing && !existing.structuredFields) {
+        const detailedKeys = ["OBJETIVO GENERAL", "MATERIALES", "PREPARACIÓN DEL ESPACIO", "INSTRUCCIÓN INICIAL", "MOMENTO RECOMENDADO", "DESARROLLO DEL ACTIVADOR", "PREGUNTAS DE CIERRE", "METODOLOGÍA", "STORYTELLING", "ACUERDOS O REGLAS", "DESARROLLO DEL DISPOSITIVO", "ROL DE LA PERSONA FACILITADORA", "SEGURIDAD Y CUIDADOS", "CRITERIO DE FINALIZACIÓN", "PREGUNTAS DE DEBRIEFING", "APRENDIZAJE ESPERADO", "RESULTADOS O REGISTRO", "VARIACIONES"];
+        const rebuiltContent = detailedKeys.some(key => String(fields[key] || "").trim());
+        if (!rebuiltContent) generated.html = existing.html;
+      }
+      Object.assign(item, generated);
       await saveUploadedActivity(item);
     }
-    activities.push(item);
+    if (existing) activities = activities.map(activity => activity.id === item.id ? item : activity);
+    else activities.push(item);
     renderUploadedManager();
-    uploadMessage.textContent = `Ficha agregada correctamente a ${category === "activador" ? "Activadores" : "Dispositivos"}${savedLocally ? " y guardada en este navegador" : ""}.`;
+    uploadMessage.textContent = existing
+      ? "Ficha actualizada correctamente. Todos los cambios quedaron guardados."
+      : `Ficha agregada correctamente a ${category === "activador" ? "Activadores" : "Dispositivos"}${savedLocally ? " y guardada en este navegador" : ""}.`;
     uploadMessage.classList.add("success");
     setCategory(category);
     setTimeout(() => {
@@ -1410,6 +1523,47 @@ uploadForm.addEventListener("submit", async event => {
     uploadMessage.textContent = error.message || "No se pudo guardar la ficha. Inténtalo nuevamente.";
   } finally {
     submitButton.disabled = false;
+  }
+});
+
+importSubmit?.addEventListener("click", async () => {
+  const file = importSourceFile?.files?.[0];
+  const category = new FormData(uploadForm).get("importCategory") || "activador";
+  const name = String(uploadForm.elements.namedItem("importName")?.value || "").trim();
+  const summary = String(uploadForm.elements.namedItem("importSummary")?.value || "").trim();
+  if (!file || !name || !summary) {
+    importMessage.textContent = "Selecciona el archivo y completa el nombre y el resumen.";
+    return;
+  }
+  const durationLabel = String(uploadForm.elements.namedItem("importDuration")?.value || "Por definir").trim() || "Por definir";
+  const participantsLabel = String(uploadForm.elements.namedItem("importParticipants")?.value || "Por definir").trim() || "Por definir";
+  const item = {
+    id: `ficha-${Date.now()}`, title: name, shortTitle: name, summary, category,
+    duration: Number(durationLabel.match(/\d+/)?.[0] || 0), durationLabel,
+    participants: Number(participantsLabel.match(/\d+/)?.[0] || 0), participantsLabel,
+    mode: "presencial", skills: ["aprendizaje"], difficulty: "inicial", audience: "general",
+    accent: category === "activador" ? "pink" : "red", symbol: category === "activador" ? "◷" : "◇",
+    publicLabel: "General", keywords: `${name} ${summary} ${category}`,
+    html: `<p class="lead">${safeText(summary)}</p><h2>Ficha técnica completada</h2><p>El documento original se encuentra disponible en el botón de descarga de esta ficha.</p>`,
+    uploaded: true, createdInPortal: true, importedFromTemplate: true,
+    fileName: file.name, fileType: file.type, fileBlob: file
+  };
+  importSubmit.disabled = true;
+  importMessage.textContent = "Cargando la ficha en la biblioteca…";
+  try {
+    await saveUploadedActivity(item);
+    activities.push(item);
+    renderUploadedManager();
+    renderActivities();
+    importMessage.textContent = `Ficha añadida correctamente a ${category === "activador" ? "Activadores" : "Dispositivos"}.`;
+    importMessage.classList.add("success");
+    importSourceFile.value = "";
+    syncSelectedSourceFile();
+    ["importName", "importSummary", "importDuration", "importParticipants"].forEach(field => setCreateValue(field, ""));
+  } catch (error) {
+    importMessage.textContent = "No fue posible guardar la ficha. Inténtalo nuevamente.";
+  } finally {
+    importSubmit.disabled = false;
   }
 });
 
