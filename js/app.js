@@ -97,7 +97,6 @@ const renameActivityName = document.querySelector("#renameActivityName");
 const renameMessage = document.querySelector(".rename-message");
 let pendingDeleteId = "";
 let pendingRenameId = "";
-let editingActivityId = "";
 let currentOriginalUrl = "";
 
 async function remoteRequest(action, options = {}) {
@@ -238,7 +237,7 @@ function renderUploadedManager() {
         <small>${categoryName(item.category)} · ${item.uploaded ? safeText(item.fileName) : "Ficha original"}</small>
       </div>
       <div class="uploaded-item-actions">
-        <button class="request-edit" type="button" data-edit-id="${item.id}">Editar ficha</button>
+        <button class="request-rename" type="button" data-rename-id="${item.id}">Editar nombre</button>
         <button class="request-delete" type="button" data-delete-id="${item.id}">Eliminar</button>
       </div>
     </article>`).join("");
@@ -650,7 +649,6 @@ function cardTemplate(item) {
       <div class="card-footer">
         <small>${item.skills.map(skill => skill.charAt(0).toUpperCase() + skill.slice(1)).join(" · ")}</small>
         <span class="card-actions">
-          <button class="edit-card-name" type="button" data-edit-id="${item.id}" aria-label="Editar ficha ${item.shortTitle}" title="Editar ficha">✎</button>
           <button class="view-detail" type="button" data-open="${item.id}" aria-label="Ver más información">↗</button>
         </span>
       </div>
@@ -803,7 +801,6 @@ function openDetail(id) {
   detailSummary.textContent = included.has("summary") ? item.summary : "";
   detailSummary.hidden = !included.has("summary");
   dialog.querySelector(".detail-content").innerHTML = item.html;
-  dialog.querySelector(".edit-detail-name").dataset.editId = item.id;
   const downloadButton = dialog.querySelector(".download-button");
   const originalButton = dialog.querySelector(".original-file-button");
   if (currentUploadedUrl) URL.revokeObjectURL(currentUploadedUrl);
@@ -872,12 +869,6 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("click", event => {
-  const editButton = event.target.closest("[data-edit-id]");
-  if (editButton) {
-    event.stopPropagation();
-    openEditActivity(editButton.dataset.editId);
-    return;
-  }
   const favoriteButton = event.target.closest("[data-favorite]");
   if (favoriteButton) {
     event.stopPropagation();
@@ -951,7 +942,6 @@ menuToggle.addEventListener("click", () => {
 });
 
 function resetUploadForm() {
-  editingActivityId = "";
   uploadForm.reset();
   uploadMessage.textContent = "";
   uploadMessage.classList.remove("success");
@@ -970,63 +960,6 @@ function resetUploadForm() {
 function setCreateValue(name, value) {
   const control = uploadForm.elements.namedItem(name);
   if (control && value !== undefined && value !== null) control.value = value;
-}
-
-function openEditActivity(id) {
-  const item = activities.find(activity => activity.id === id);
-  if (!item) return;
-  if (dialog.open) dialog.close();
-  resetUploadForm();
-  editingActivityId = id;
-  const categoryInput = uploadForm.querySelector(`input[name='uploadCategory'][value='${item.category}']`);
-  if (categoryInput) categoryInput.checked = true;
-  syncCreateType();
-  document.querySelector("#uploadTitle").textContent = "Editar ficha";
-  uploadForm.querySelector(".upload-submit").innerHTML = "Guardar cambios <span>✓</span>";
-  uploadForm.querySelector(".upload-cancel").textContent = "Cancelar edición";
-  const fields = item.structuredFields || {};
-  const fieldMap = {
-    activityName: item.shortTitle,
-    summary: fields["RESUMEN PARA TARJETA"] || item.summary,
-    objective: fields["OBJETIVO GENERAL"] || "",
-    duration: fields["DURACIÓN"] || item.durationLabel,
-    participants: fields["PARTICIPANTES"] || item.participantsLabel,
-    mode: fields["MODALIDAD"] || item.mode,
-    skills: fields["COMPETENCIAS"] || (item.skills || []).join(", "),
-    audience: fields["PÚBLICO OBJETIVO"] || item.publicLabel || item.audience,
-    materials: fields["MATERIALES"], preparation: fields["PREPARACIÓN DEL ESPACIO"], initialInstruction: fields["INSTRUCCIÓN INICIAL"],
-    activatorMoment: fields["MOMENTO RECOMENDADO"], activatorEnergy: fields["NIVEL DE ENERGÍA"], activatorDevelopment: fields["DESARROLLO DEL ACTIVADOR"], activatorQuestions: fields["PREGUNTAS DE CIERRE"], activatorLearning: fields["APRENDIZAJE ESPERADO"], activatorNotes: fields["VARIACIONES"] || fields["OBSERVACIONES PARA FACILITACIÓN"],
-    deviceDifficulty: fields["NIVEL DE DIFICULTAD"] || item.difficulty, deviceMethodology: fields["METODOLOGÍA"], deviceStorytelling: fields["STORYTELLING"], deviceRules: fields["ACUERDOS O REGLAS"], deviceDevelopment: fields["DESARROLLO DEL DISPOSITIVO"], deviceFacilitator: fields["ROL DE LA PERSONA FACILITADORA"], deviceSafety: fields["SEGURIDAD Y CUIDADOS"], deviceCompletion: fields["CRITERIO DE FINALIZACIÓN"], deviceQuestions: fields["PREGUNTAS DE DEBRIEFING"], deviceLearning: fields["APRENDIZAJE ESPERADO"], deviceResults: fields["RESULTADOS O REGISTRO"], deviceNotes: fields["VARIACIONES"] || fields["OBSERVACIONES PARA FACILITACIÓN"],
-    gridTitle: fields["TÍTULO DE CUADRÍCULA"], gridXAxis: fields["EJE X"], gridYAxis: fields["EJE Y"], gridColumns: fields["COLUMNAS DE CUADRÍCULA"], gridRows: fields["FILAS DE CUADRÍCULA"], gridColumnLabels: fields["ENCABEZADOS DE COLUMNAS"], gridRowLabels: fields["ETIQUETAS DE FILAS"], gridFooter: fields["TEXTO INFERIOR DE CUADRÍCULA"]
-  };
-  Object.entries(fieldMap).forEach(([name, value]) => setCreateValue(name, value));
-  if (fields["SECCIONES INCLUIDAS"]) {
-    const included = new Set(fields["SECCIONES INCLUIDAS"].split(","));
-    uploadForm.querySelectorAll("input[name='includeSections']:not(:disabled)").forEach(input => { input.checked = included.has(input.value); });
-  }
-  const gridEnabled = fields["CUADRÍCULA ACTIVA"] === "sí";
-  if (gridToggle) gridToggle.checked = gridEnabled;
-  syncGridBuilder();
-  if (fields["NIVELES ACTIVOS"] === "sí" && levelsToggle) {
-    levelsToggle.checked = true;
-    syncLevelsBuilder();
-    try {
-      const levels = JSON.parse(fields["NIVELES"] || "[]");
-      levelsList.innerHTML = "";
-      levels.forEach(() => addLevel());
-      levels.forEach((level, index) => {
-        const card = levelsList.children[index];
-        card.querySelector("[data-level-name]").value = level.name || "";
-        card.querySelector("[data-level-duration]").value = level.duration || "";
-        card.querySelector("[data-level-description]").value = level.description || "";
-      });
-    } catch (error) { /* conserva el editor vacío */ }
-  }
-  syncInclusionFields();
-  renderUploadedManager();
-  uploadDialog.showModal();
-  document.body.style.overflow = "hidden";
-  uploadDialog.querySelector(".upload-shell").scrollTop = 0;
 }
 
 function closeUploadDialog() {
@@ -1086,10 +1019,10 @@ restoreBackupFile.addEventListener("change", async () => {
 });
 
 uploadedList.addEventListener("click", event => {
-  const editButton = event.target.closest("[data-edit-id]");
-  if (editButton) {
+  const renameButton = event.target.closest("[data-rename-id]");
+  if (renameButton) {
     event.stopPropagation();
-    openEditActivity(editButton.dataset.editId);
+    openRenameDialog(renameButton.dataset.renameId);
     return;
   }
   const button = event.target.closest("[data-delete-id]");
@@ -1156,9 +1089,6 @@ renameForm.addEventListener("submit", async event => {
     closeRenameDialog();
     renderUploadedManager();
     renderActivities();
-    if (dialog.open && dialog.querySelector(".edit-detail-name").dataset.renameId === item.id) {
-      dialog.querySelector("#dialogTitle").textContent = newName;
-    }
   } catch (error) {
     renameMessage.textContent = "No fue posible guardar el nombre. Inténtalo nuevamente.";
   } finally {
@@ -1450,14 +1380,8 @@ uploadForm.addEventListener("submit", async event => {
     uploadMessage.textContent = "Completa los campos necesarios para construir la ficha.";
     return;
   }
-  const existing = editingActivityId ? activities.find(activity => activity.id === editingActivityId) : null;
-  if (existing && !window.confirm(`¿Confirmas que deseas guardar los cambios realizados en “${existing.shortTitle}”?`)) {
-    uploadMessage.textContent = "La edición fue cancelada. La ficha se mantiene sin cambios.";
-    return;
-  }
   const item = {
-    ...(existing || {}),
-    id: existing?.id || `ficha-${Date.now()}`,
+    id: `ficha-${Date.now()}`,
     title: name,
     shortTitle: name,
     summary: uploadForm.elements.namedItem("summary").value.trim(),
@@ -1480,7 +1404,7 @@ uploadForm.addEventListener("submit", async event => {
   };
   const submitButton = uploadForm.querySelector(".upload-submit");
   submitButton.disabled = true;
-  uploadMessage.textContent = existing ? "Guardando todos los cambios…" : "Creando la tarjeta y la ficha visual…";
+  uploadMessage.textContent = "Creando la tarjeta y la ficha visual…";
   try {
     const fields = createFieldsFromForm(category);
     let savedLocally = !remoteMode;
@@ -1498,21 +1422,12 @@ uploadForm.addEventListener("submit", async event => {
         await saveUploadedActivity(item);
       }
     } else {
-      const generated = createLocalActivity(item, fields);
-      if (existing && !existing.structuredFields) {
-        const detailedKeys = ["OBJETIVO GENERAL", "MATERIALES", "PREPARACIÓN DEL ESPACIO", "INSTRUCCIÓN INICIAL", "MOMENTO RECOMENDADO", "DESARROLLO DEL ACTIVADOR", "PREGUNTAS DE CIERRE", "METODOLOGÍA", "STORYTELLING", "ACUERDOS O REGLAS", "DESARROLLO DEL DISPOSITIVO", "ROL DE LA PERSONA FACILITADORA", "SEGURIDAD Y CUIDADOS", "CRITERIO DE FINALIZACIÓN", "PREGUNTAS DE DEBRIEFING", "APRENDIZAJE ESPERADO", "RESULTADOS O REGISTRO", "VARIACIONES"];
-        const rebuiltContent = detailedKeys.some(key => String(fields[key] || "").trim());
-        if (!rebuiltContent) generated.html = existing.html;
-      }
-      Object.assign(item, generated);
+      Object.assign(item, createLocalActivity(item, fields));
       await saveUploadedActivity(item);
     }
-    if (existing) activities = activities.map(activity => activity.id === item.id ? item : activity);
-    else activities.push(item);
+    activities.push(item);
     renderUploadedManager();
-    uploadMessage.textContent = existing
-      ? "Ficha actualizada correctamente. Todos los cambios quedaron guardados."
-      : `Ficha agregada correctamente a ${category === "activador" ? "Activadores" : "Dispositivos"}${savedLocally ? " y guardada en este navegador" : ""}.`;
+    uploadMessage.textContent = `Ficha agregada correctamente a ${category === "activador" ? "Activadores" : "Dispositivos"}${savedLocally ? " y guardada en este navegador" : ""}.`;
     uploadMessage.classList.add("success");
     setCategory(category);
     setTimeout(() => {
